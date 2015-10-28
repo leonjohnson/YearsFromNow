@@ -12,14 +12,18 @@ class PageContentViewController: UIViewController {
     
     
     
-    override func viewDidLoad() {
+    
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         let heroImage = UIImage(named: "home")
         let backgroundImageView = UIImageView(image: heroImage)
-        backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFit
+        backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
         
         backgroundImageView.clipsToBounds = true
+        backgroundImageView.frame = self.view.frame
         
         self.view.addSubview(backgroundImageView)
         self.view.sendSubviewToBack(backgroundImageView)
@@ -30,9 +34,6 @@ class PageContentViewController: UIViewController {
         
         logoLabel.textColor = UIColor.whiteColor()
         descriptionLabel.textColor = UIColor.whiteColor()
-        
-        
-
-        
+ 
     }
 }

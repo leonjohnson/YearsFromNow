@@ -26,7 +26,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>None</string>
 			<key>CFBundleURLName</key>
-			<string>com.usertesting.utstarttest</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array/>
 		</dict>
