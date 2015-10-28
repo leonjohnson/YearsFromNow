@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        themeSelected()
+        
+        // Ensure we start with an empty database
+        //NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.description, error: nil)
+        
+        // Remove 'new user' key
+        for key in NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys {
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
+        }
+        
+        Fabric.with([Crashlytics.self()])
+        
         return true
     }
 
