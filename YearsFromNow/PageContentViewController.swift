@@ -6,10 +6,8 @@ class PageContentViewController: UIViewController {
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var pageIndex: Int?
-    var titleText : String!
-    var imageName : String!
-    
+    var pageIndex : Int!
+    let backgroundImages = ["home", "home", "home", "nil"]
     
     
     
@@ -18,22 +16,28 @@ class PageContentViewController: UIViewController {
     {
         super.viewDidLoad()
         
-        let heroImage = UIImage(named: "home")
-        let backgroundImageView = UIImageView(image: heroImage)
-        backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
-        
-        backgroundImageView.clipsToBounds = true
-        backgroundImageView.frame = self.view.frame
-        
-        self.view.addSubview(backgroundImageView)
-        self.view.sendSubviewToBack(backgroundImageView)
-
-        
-        //self.view.bringSubviewToFront(logoLabel)
-        //self.view.bringSubviewToFront(descriptionLabel)
+        if pageIndex > 2 || pageIndex.isNegative
+        {
+            // present a plain background as is
+            
+        }
+        else
+        {
+            let backgroundImage = UIImage(named: backgroundImages[pageIndex])
+            let backgroundImageView = UIImageView(image: backgroundImage)
+            backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
+            
+            backgroundImageView.clipsToBounds = true
+            backgroundImageView.frame = self.view.frame
+            
+            self.view.addSubview(backgroundImageView)
+            self.view.sendSubviewToBack(backgroundImageView)
+            
+            
+            
+        }
         
         logoLabel.textColor = UIColor.whiteColor()
         descriptionLabel.textColor = UIColor.whiteColor()
- 
     }
 }
