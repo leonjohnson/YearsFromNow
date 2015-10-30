@@ -86,7 +86,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     
     override func viewWillAppear(animated: Bool)
     {
-        
+        navigationController?.navigationBarHidden = false
         
         middleOfScreen = (self.view.frame.width/2, self.view.frame.height/2)
         

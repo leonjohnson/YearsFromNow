@@ -629,6 +629,9 @@
                                 <state key="normal" title="OK, got it">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="fRB-bt-iBo" kind="showDetail" action="showViewController:sender:" id="P0e-li-aiS"/>
+                                </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktq-dC-dqb">
                                 <rect key="frame" x="175" y="148" width="250" height="145"/>
@@ -648,26 +651,23 @@
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7He-BY-cRp">
-                                <rect key="frame" x="136" y="38" width="329" height="80"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="stV-f5-x1e">
+                                <rect key="frame" x="136" y="47" width="329" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="329" id="eKp-TM-NPF"/>
+                                    <constraint firstAttribute="width" constant="329" id="jRP-BX-jbf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="stV-f5-x1e" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="1Qq-Lb-7yQ"/>
                             <constraint firstItem="eYr-ej-jsA" firstAttribute="centerX" secondItem="Ktq-dC-dqb" secondAttribute="centerX" id="5qu-YM-4HH"/>
+                            <constraint firstItem="Ktq-dC-dqb" firstAttribute="top" secondItem="stV-f5-x1e" secondAttribute="bottom" constant="21" id="5ys-FE-0On"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="top" secondItem="BPV-lZ-bPj" secondAttribute="bottom" constant="128" id="6hi-nJ-eC7"/>
                             <constraint firstItem="0Bx-Eg-PRh" firstAttribute="top" secondItem="eYr-ej-jsA" secondAttribute="bottom" constant="74" id="AKm-ds-J0U"/>
+                            <constraint firstItem="stV-f5-x1e" firstAttribute="top" secondItem="BPV-lZ-bPj" secondAttribute="bottom" constant="27" id="BzA-sq-cG0"/>
                             <constraint firstAttribute="centerX" secondItem="eYr-ej-jsA" secondAttribute="centerX" id="L52-LW-f3h"/>
-                            <constraint firstItem="7He-BY-cRp" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="Lmj-OA-Bed"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="NMC-5J-rov"/>
-                            <constraint firstItem="Ktq-dC-dqb" firstAttribute="top" secondItem="7He-BY-cRp" secondAttribute="bottom" constant="30" id="VXw-Kg-LF2"/>
-                            <constraint firstItem="7He-BY-cRp" firstAttribute="top" secondItem="BPV-lZ-bPj" secondAttribute="bottom" constant="18" id="X8D-KU-Q2H"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="dYW-5y-dgS"/>
                         </constraints>
                         <variation key="default">
@@ -679,7 +679,7 @@
                     <navigationItem key="navigationItem" id="Qfi-pn-2hH"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="Ktq-dC-dqb" id="7cQ-m6-Fii"/>
-                        <outlet property="logoLabel" destination="7He-BY-cRp" id="VhC-cd-QxP"/>
+                        <outlet property="logoView" destination="stV-f5-x1e" id="dhi-Cb-HPP"/>
                         <outlet property="skipButton" destination="eYr-ej-jsA" id="QIM-uQ-vFF"/>
                     </connections>
                 </viewController>
@@ -696,4 +696,7 @@
             <point key="canvasLocation" x="434" y="1795"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="76" height="76"/>
+    </resources>
 </document>
