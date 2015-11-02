@@ -3,11 +3,13 @@ import UIKit
 class PageContentViewController: UIViewController {
     
     @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var swipeToBeginIntroLabel: UILabel!
     
     var pageIndex : Int!
-    let backgroundImages = ["home", "home", "home", "nil"]
+    let backgroundImages = ["home", "timeline", "create", "bargraphs", "nil"]
     
     
     override func viewWillAppear(animated: Bool) {
@@ -17,18 +19,54 @@ class PageContentViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        skipButton.hidden = true
+        swipeToBeginIntroLabel.hidden = false
+        swipeToBeginIntroLabel.textColor = white
+        swipeToBeginIntroLabel.font = systemFontBold15
+        getStartedButton.hidden = true
+        getStartedButton.backgroundColor = chosenThemeButtonColour
+        getStartedButton.setTitleColor(chosenThemeTextColour, forState: UIControlState.Normal)
+        getStartedButton.setTitle("Skip this intro", forState: UIControlState.Normal)
+        var backgroundImage : UIImage
         
-        if pageIndex > 2 || pageIndex.isNegative
+        if pageIndex >= (backgroundImages.count) || pageIndex.isNegative
         {
             // present a plain background as is
             skipButton.hidden = false
+            getStartedButton.hidden = true
             logoView.hidden = true
-            descriptionLabel.hidden = false
-            descriptionLabel.text = "Let's get started"
-            
         }
         else
         {
+            switch pageIndex
+            {
+            case 0:
+                logoView.hidden = false
+                descriptionLabel.hidden = false
+            case 1:
+                logoView.hidden = true
+                descriptionLabel.hidden = true
+                swipeToBeginIntroLabel.hidden = true
+            case 2:
+                logoView.hidden = true
+                descriptionLabel.hidden = true
+                swipeToBeginIntroLabel.hidden = true
+            case 3:
+                logoView.hidden = true
+                descriptionLabel.hidden = true
+                swipeToBeginIntroLabel.hidden = true
+            case 4:
+                logoView.hidden = true
+                descriptionLabel.hidden = true
+                swipeToBeginIntroLabel.hidden = true
+                getStartedButton.hidden = false
+                getStartedButton.setTitle("Let's get started", forState: UIControlState.Normal)
+                
+            default:
+                print("nil")
+            }
+            
+            /*
             if pageIndex == 0
             {
                 logoView.hidden = false
@@ -37,17 +75,22 @@ class PageContentViewController: UIViewController {
             {
                 logoView.hidden = true
             }
+            */
+            
+            if pageIndex+1 < backgroundImages.count
+            {
+                backgroundImage = UIImage(named: backgroundImages[pageIndex])!
+                let backgroundImageView = UIImageView(image: backgroundImage)
+                backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
+                
+                backgroundImageView.clipsToBounds = true
+                backgroundImageView.frame = self.view.frame
+                
+                self.view.addSubview(backgroundImageView)
+                self.view.sendSubviewToBack(backgroundImageView)
+            }
             
             
-            let backgroundImage = UIImage(named: backgroundImages[pageIndex])
-            let backgroundImageView = UIImageView(image: backgroundImage)
-            backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
-            
-            backgroundImageView.clipsToBounds = true
-            backgroundImageView.frame = self.view.frame
-            
-            self.view.addSubview(backgroundImageView)
-            self.view.sendSubviewToBack(backgroundImageView)
             
             
             

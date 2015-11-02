@@ -657,6 +657,23 @@
                                     <constraint firstAttribute="width" constant="329" id="jRP-BX-jbf"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhb-tt-VNU">
+                                <rect key="frame" x="499" y="550" width="81" height="30"/>
+                                <state key="normal" title="SKIP INTRO"/>
+                                <connections>
+                                    <segue destination="fRB-bt-iBo" kind="showDetail" id="u3F-Yy-Wlj"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to begin the intro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRv-Ra-mUC">
+                                <rect key="frame" x="209" y="360" width="182" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="182" id="kqy-vk-Hyf"/>
+                                    <constraint firstAttribute="height" constant="21" id="oqc-Dp-htH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -668,7 +685,11 @@
                             <constraint firstItem="stV-f5-x1e" firstAttribute="top" secondItem="BPV-lZ-bPj" secondAttribute="bottom" constant="27" id="BzA-sq-cG0"/>
                             <constraint firstAttribute="centerX" secondItem="eYr-ej-jsA" secondAttribute="centerX" id="L52-LW-f3h"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="NMC-5J-rov"/>
+                            <constraint firstItem="BRv-Ra-mUC" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="T6m-A1-vjR"/>
+                            <constraint firstItem="qhb-tt-VNU" firstAttribute="bottom" secondItem="stV-f5-x1e" secondAttribute="bottom" constant="453" id="Y7v-hX-Eo7"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="dYW-5y-dgS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qhb-tt-VNU" secondAttribute="trailing" id="g0z-KK-qnc"/>
+                            <constraint firstItem="eYr-ej-jsA" firstAttribute="top" secondItem="BRv-Ra-mUC" secondAttribute="bottom" constant="101" id="iD5-UN-hoY"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -679,8 +700,10 @@
                     <navigationItem key="navigationItem" id="Qfi-pn-2hH"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="Ktq-dC-dqb" id="7cQ-m6-Fii"/>
+                        <outlet property="getStartedButton" destination="eYr-ej-jsA" id="lIZ-W7-Clm"/>
                         <outlet property="logoView" destination="stV-f5-x1e" id="dhi-Cb-HPP"/>
-                        <outlet property="skipButton" destination="eYr-ej-jsA" id="QIM-uQ-vFF"/>
+                        <outlet property="skipButton" destination="qhb-tt-VNU" id="3fx-5v-QIJ"/>
+                        <outlet property="swipeToBeginIntroLabel" destination="BRv-Ra-mUC" id="PnO-As-G3Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0w5-hS-Y97" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -699,4 +722,7 @@
     <resources>
         <image name="logo" width="76" height="76"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="u3F-Yy-Wlj"/>
+    </inferredMetricsTieBreakers>
 </document>

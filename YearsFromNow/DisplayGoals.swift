@@ -466,7 +466,6 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                     label.font = timeLineLabelFont
                     label.textColor = chosenThemeTextColour
                     let d = nsDateToDateString(goalRetrieved.end_date)
-                    print("bug catcher: \(d)")
                     label.text = "\(loopProducingTimeLineView+1). " + goalRetrieved.notes + " (\(d))"
                     
                     label.sizeToFit()

@@ -313,7 +313,6 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         dateFormatter2.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter2.timeStyle = NSDateFormatterStyle.NoStyle
         let thedate = dateFormatter2.dateFromString(dateString)
-        print("bug catcher 4: \(thedate)")
         return thedate!
     }
     
@@ -330,7 +329,6 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
         formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
         formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
-        print("bug catcher 3: \(formattedDateString.uppercaseString)")
         return formattedDateString.uppercaseString
     }
     /*
@@ -441,7 +439,6 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             
             goal.end_date = dateStringToNSDate(endDate.text!)
             
-            print("bug catcher 2: \(goal.end_date)")
             
             do {
                 let realm = try Realm()
