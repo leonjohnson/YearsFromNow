@@ -38,7 +38,6 @@ extension CreateEditGoals: UIPickerViewDelegate
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         //
-        print("didSelectRow")
         
         var textToDisplay:String = ""
         
@@ -47,14 +46,12 @@ extension CreateEditGoals: UIPickerViewDelegate
         {
             let selectedRowForMonth = months[row]
             currentlyDisplayedMonthIndex = row
-            print("Month selected is : \(selectedRowForMonth)")
             textToDisplay = selectedRowForMonth + " " + String(currentYear + currentlyDisplayedYearIndex)
         }
         if component == 1
         {
             let selectedRowForYear = String(currentYear+row)
             currentlyDisplayedYearIndex = row
-            print("Year selected is : \(selectedRowForYear)")
             textToDisplay = months[currentlyDisplayedMonthIndex] + " " + selectedRowForYear
             
         }
@@ -70,7 +67,6 @@ extension CreateEditGoals: UIPickerViewDelegate
         // validate the selection
         if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < currentMonth
         {
-            print("You have selected an date in the past!")
             pickerView.selectRow(currentMonth, inComponent: 0, animated: true)
         }
         

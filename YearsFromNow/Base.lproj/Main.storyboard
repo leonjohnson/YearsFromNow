@@ -621,7 +621,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYr-ej-jsA">
-                                <rect key="frame" x="183" y="482" width="234" height="44"/>
+                                <rect key="frame" x="183" y="406" width="234" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="KcQ-q1-tXA"/>
                                     <constraint firstAttribute="width" constant="234" id="YXo-m8-8yx"/>
@@ -664,10 +664,10 @@
                                     <segue destination="fRB-bt-iBo" kind="showDetail" id="u3F-Yy-Wlj"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to begin the intro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRv-Ra-mUC">
-                                <rect key="frame" x="209" y="360" width="182" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Swipe to the left to begin the intro." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRv-Ra-mUC">
+                                <rect key="frame" x="166" y="286" width="264" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="182" id="kqy-vk-Hyf"/>
+                                    <constraint firstAttribute="width" constant="260" id="kqy-vk-Hyf"/>
                                     <constraint firstAttribute="height" constant="21" id="oqc-Dp-htH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -681,18 +681,22 @@
                             <constraint firstItem="eYr-ej-jsA" firstAttribute="centerX" secondItem="Ktq-dC-dqb" secondAttribute="centerX" id="5qu-YM-4HH"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="top" secondItem="stV-f5-x1e" secondAttribute="bottom" constant="21" id="5ys-FE-0On"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="top" secondItem="BPV-lZ-bPj" secondAttribute="bottom" constant="128" id="6hi-nJ-eC7"/>
-                            <constraint firstItem="0Bx-Eg-PRh" firstAttribute="top" secondItem="eYr-ej-jsA" secondAttribute="bottom" constant="74" id="AKm-ds-J0U"/>
+                            <constraint firstItem="0Bx-Eg-PRh" firstAttribute="top" secondItem="eYr-ej-jsA" secondAttribute="bottom" constant="150" id="AKm-ds-J0U"/>
                             <constraint firstItem="stV-f5-x1e" firstAttribute="top" secondItem="BPV-lZ-bPj" secondAttribute="bottom" constant="27" id="BzA-sq-cG0"/>
                             <constraint firstAttribute="centerX" secondItem="eYr-ej-jsA" secondAttribute="centerX" id="L52-LW-f3h"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="NMC-5J-rov"/>
-                            <constraint firstItem="BRv-Ra-mUC" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="T6m-A1-vjR"/>
+                            <constraint firstItem="BRv-Ra-mUC" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="RMm-D3-Fnx"/>
+                            <constraint firstItem="BRv-Ra-mUC" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" constant="-39" id="T6m-A1-vjR"/>
                             <constraint firstItem="qhb-tt-VNU" firstAttribute="bottom" secondItem="stV-f5-x1e" secondAttribute="bottom" constant="453" id="Y7v-hX-Eo7"/>
                             <constraint firstItem="Ktq-dC-dqb" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" id="dYW-5y-dgS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qhb-tt-VNU" secondAttribute="trailing" id="g0z-KK-qnc"/>
-                            <constraint firstItem="eYr-ej-jsA" firstAttribute="top" secondItem="BRv-Ra-mUC" secondAttribute="bottom" constant="101" id="iD5-UN-hoY"/>
+                            <constraint firstItem="eYr-ej-jsA" firstAttribute="top" secondItem="BRv-Ra-mUC" secondAttribute="bottom" constant="99" id="iD5-UN-hoY"/>
+                            <constraint firstItem="BRv-Ra-mUC" firstAttribute="centerX" secondItem="SPj-yd-m0p" secondAttribute="centerX" constant="-39" id="oDF-8v-c1P"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="T6m-A1-vjR"/>
+                                <exclude reference="oDF-8v-c1P"/>
                                 <exclude reference="L52-LW-f3h"/>
                             </mask>
                         </variation>

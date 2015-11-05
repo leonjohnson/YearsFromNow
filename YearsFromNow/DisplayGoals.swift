@@ -749,16 +749,29 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         
         var formattedDateString = dateFormatter.stringFromDate(date)
-        print("step 0: \(formattedDateString)")
+        #if DEBUG
+            print("step 0: \(formattedDateString)")
+        #endif
+        
 
         formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
-        print("step 1: \(formattedDateString)")
+        #if DEBUG
+            print("step 1: \(formattedDateString)")
+        #endif
+        
         
         formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
-        print("step 2: \(formattedDateString)")
+        #if DEBUG
+            print("step 2: \(formattedDateString)")
+        #endif
+        
         
         formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
-        print("step 3 \(formattedDateString.uppercaseString)")
+        #if DEBUG
+            print("step 3 \(formattedDateString.uppercaseString)")
+        #endif
+        
+        
         return formattedDateString.uppercaseString
     }
 

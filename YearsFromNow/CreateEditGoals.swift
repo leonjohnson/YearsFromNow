@@ -596,7 +596,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     {
         if textView.text.isEmpty
         {
-            textView.text == "placeholder text here..."
+            textView.text = "Placeholder text here..."
         }
         else
         {

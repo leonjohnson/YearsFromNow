@@ -17,7 +17,6 @@ class TimeLineScrollView: UIScrollView {
     override func drawRect(rect: CGRect) {
         // Drawing code
         
-        print("showing")
         let context = UIGraphicsGetCurrentContext()
         CGContextBeginPath(context)
         CGContextMoveToPoint(context, dateLabelLength, 0)

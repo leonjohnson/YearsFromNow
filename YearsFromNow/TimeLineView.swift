@@ -26,14 +26,12 @@ class TimeLineView: UIView {
     func fadeOut()
     {
         self.backgroundColor = UIColor.greenColor()
-        print("going to GREEN")
     }
     
     func fadeIn()
     {
         self.backgroundColor = UIColor.redColor()
         self.alpha = 0.5
-        print("going back to BLACK")
     }
     
     

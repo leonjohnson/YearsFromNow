@@ -26,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //NSFileManager.defaultManager().removeItemAtPath(Realm.Configuration.defaultConfiguration.description, error: nil)
         
         // Remove 'new user' key
-        for key in NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys {
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
-        }
+//        for key in NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys {
+//            NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
+//        }
         
         Fabric.with([Crashlytics.self()])
         

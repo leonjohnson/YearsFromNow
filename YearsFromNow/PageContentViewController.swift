@@ -60,10 +60,11 @@ class PageContentViewController: UIViewController {
                 descriptionLabel.hidden = true
                 swipeToBeginIntroLabel.hidden = true
                 getStartedButton.hidden = false
-                getStartedButton.setTitle("Let's get started", forState: UIControlState.Normal)
+                getStartedButton.setTitle("Let's get started!", forState: UIControlState.Normal)
+                getStartedButton.center.y = (getStartedButton.center.y)+50
                 
             default:
-                print("nil")
+                break
             }
             
             /*
