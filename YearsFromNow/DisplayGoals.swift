@@ -432,7 +432,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                 if w < dateLabelLength
                 {
                     // This goal needs goal needs to be hidden as it has an end date of less than a 'quarter/month/year' in length
-                    print("Too small to show")
+                    //print("Too small to show")
                     
                     
                 }

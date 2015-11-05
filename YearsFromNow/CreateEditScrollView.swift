@@ -19,12 +19,18 @@ class CreateEditScrollView: UIScrollView
         if hitView == self
         {
             // the user just touched the scrollview and no other subview, so behave as usual.
-            print("just touched myself")
+            #if DEBUG
+                print("just touched myself")
+            #endif
+            
             return hitView
         }
         else
         {
-            print("just touched outside of myself")
+            #if DEBUG
+                print("just touched outside of myself")
+            #endif
+            
             return hitView
             
         }

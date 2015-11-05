@@ -426,7 +426,10 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             }
             catch
             {
-                print(error)
+                #if DEBUG
+                    print(error)
+                #endif
+                
             }
             
         }

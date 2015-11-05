@@ -603,6 +603,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="HXC-Ub-nJ3"/>
+                    <connections>
+                        <segue destination="fRB-bt-iBo" kind="showDetail" identifier="skipOnboarding" id="tnI-Cw-mfQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z1W-hl-U4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -620,19 +623,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYr-ej-jsA">
-                                <rect key="frame" x="183" y="406" width="234" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="KcQ-q1-tXA"/>
-                                    <constraint firstAttribute="width" constant="234" id="YXo-m8-8yx"/>
-                                </constraints>
-                                <state key="normal" title="OK, got it">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="fRB-bt-iBo" kind="showDetail" action="showViewController:sender:" id="P0e-li-aiS"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktq-dC-dqb">
                                 <rect key="frame" x="175" y="148" width="250" height="145"/>
                                 <constraints>
@@ -674,6 +664,19 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYr-ej-jsA">
+                                <rect key="frame" x="183" y="406" width="234" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="KcQ-q1-tXA"/>
+                                    <constraint firstAttribute="width" constant="234" id="YXo-m8-8yx"/>
+                                </constraints>
+                                <state key="normal" title="OK, got it">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="fRB-bt-iBo" kind="showDetail" action="showViewController:sender:" id="P0e-li-aiS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -727,6 +730,6 @@
         <image name="logo" width="76" height="76"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u3F-Yy-Wlj"/>
+        <segue reference="tnI-Cw-mfQ"/>
     </inferredMetricsTieBreakers>
 </document>

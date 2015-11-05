@@ -14,6 +14,7 @@ class PageContentViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.navigationBarHidden = true
+        
     }
     
     override func viewDidLoad()
@@ -107,13 +108,7 @@ class PageContentViewController: UIViewController {
     }
     
     
-    @IBAction func cancelOnboarding()
-    {
-        //let uivc = DisplayGoals() as UIViewController
-        //self.navigationController?.pushViewController(uivc, animated: true)
-        
-        //performSegueWithIdentifier("showCreateEditView", sender: timeLineV.goal!)
-    }
+    
 }
 
 
