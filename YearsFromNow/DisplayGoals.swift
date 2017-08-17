@@ -20,8 +20,8 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     @IBOutlet weak var createNewGoalButtonItem: UIBarButtonItem!
     @IBOutlet weak var toolTip : Tooltip!
     
-    let calendar = NSCalendar.currentCalendar()
-    let today = NSDate()
+    let calendar = Calendar.current
+    let today = Date()
     var scrollDataTable : [[String:CGFloat]] = []
     var middleOfScreen : (x:CGFloat, y:CGFloat) = (0,0)
     var currentQuarter : Int = Int()
@@ -30,8 +30,6 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     var timeLineLabelsArray : [UILabel] = []
     var dateLabelArray : [UILabel] = []
     var lastYContentOffset : CGFloat = 0
-    
-    
     
     
     override func viewDidLoad()
@@ -43,33 +41,33 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         self.navigationItem.leftBarButtonItem?.tintColor = chosenThemeAccentColour
         
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clearColor()
-        navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        navigationController?.navigationBar.isHidden = false
         
         
 
         let attributes = [NSFontAttributeName:lightFont]
-        let newAttributes = [NSFontAttributeName:systemFontBold13, NSForegroundColorAttributeName:UIColor.grayColor()]
-        dateSwitcher.setTitleTextAttributes(attributes, forState: .Normal)
-        dateSwitcher.setTitleTextAttributes(newAttributes, forState: .Selected)
-        let comp = calendar.components([.Year, NSCalendarUnit.Month] , fromDate: today)
-        currentYear = String(comp.year).uppercaseString
+        let newAttributes = [NSFontAttributeName:systemFontBold13, NSForegroundColorAttributeName:UIColor.gray]
+        dateSwitcher.setTitleTextAttributes(attributes, for: UIControlState())
+        dateSwitcher.setTitleTextAttributes(newAttributes, for: .selected)
+        let comp = (calendar as NSCalendar).components([.year, NSCalendar.Unit.month] , from: today)
+        currentYear = String(describing: comp.year).uppercased()
         self.navigationItem.leftBarButtonItem?.title = currentYear
         
         
         
         switch comp.month
         {
-        case 1,2,3:
+        case ?1,?2,?3:
             currentQuarter = 1
-        case 4,5,6:
+        case ?4,?5,?6:
             currentQuarter = 2
-        case 7,8,9:
+        case ?7,?8,?9:
             currentQuarter = 3
-        case 10,11,12:
+        case ?10,?11,?12:
             currentQuarter = 4
         default:
             currentQuarter = -1
@@ -84,9 +82,9 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
-        navigationController?.navigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
         
         middleOfScreen = (self.view.frame.width/2, self.view.frame.height/2)
         
@@ -95,7 +93,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         displayGoals("")
         
         
-        let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("YearsFromNow_launchedBefore")
+        let launchedBefore = UserDefaults.standard.bool(forKey: "YearsFromNow_launchedBefore")
         if launchedBefore == true
         {
             //print("YES,launched before.")
@@ -105,7 +103,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         else
         {
             //print("NO,never launched before.")
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "YearsFromNow_launchedBefore")
+            UserDefaults.standard.set(true, forKey: "YearsFromNow_launchedBefore")
             
            
             //let mystoryBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -134,17 +132,17 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         
         
         
-        let numberOfLaunchesKeyExists = NSUserDefaults.standardUserDefaults().boolForKey("YearsFromNow_numberOfLaunches")
+        let numberOfLaunchesKeyExists = UserDefaults.standard.bool(forKey: "YearsFromNow_numberOfLaunches")
         if numberOfLaunchesKeyExists == true
         {
             
-            var launchCount = NSUserDefaults.standardUserDefaults().integerForKey("YearsFromNow_numberOfLaunches")
+            var launchCount = UserDefaults.standard.integer(forKey: "YearsFromNow_numberOfLaunches")
             //print("numberOfLaunchesKeyExists == \(numberOfLaunchesKeyExists) WITH \(launchCount) launces")
             if launchCount == 1
             {
                 //print("This is the first time the user is seeing the screen.")
                 self.scrollView.setContentOffset((CGPoint(x: 1000, y: 0)), animated: false)
-                UIView.animateWithDuration(2.0, delay: 0, options: .CurveEaseOut, animations:
+                UIView.animate(withDuration: 2.0, delay: 0, options: .curveEaseOut, animations:
                     {
                         self.scrollView.setContentOffset((CGPoint(x: 0, y: 0)), animated: true)
                         
@@ -157,11 +155,11 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                 )
             }
             launchCount+=1
-            NSUserDefaults.standardUserDefaults().setInteger(launchCount, forKey: "YearsFromNow_numberOfLaunches")
+            UserDefaults.standard.set(launchCount, forKey: "YearsFromNow_numberOfLaunches")
         }
         else
         {
-            NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "YearsFromNow_numberOfLaunches")
+            UserDefaults.standard.set(1, forKey: "YearsFromNow_numberOfLaunches")
         }
         
         
@@ -173,7 +171,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         
     }
     
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         
     }
@@ -185,7 +183,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator)
     {
         self.view.setNeedsDisplay()
         middleOfScreen = (self.scrollView.frame.width/2, self.scrollView.frame.height/2)
@@ -200,34 +198,34 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         //let components = calendar.components([NSCalendarUnit.Month, .Quarter], fromDate: today)
         
         // get 10 years from now
-        let comps = NSDateComponents()
+        var comps = DateComponents()
         comps.month = 1
         
-        var nextMonth : NSDate
+        var nextMonth : Date
         switch dateSwitcher.selectedSegmentIndex
         {
         case 0:
-            scrollView.contentSize = CGSizeMake((dateLabelLength * 120), 20)
+            scrollView.contentSize = CGSize(width: (dateLabelLength * 120), height: 20)
             for index in 0...119
             {
                 comps.month = index
                 
                 //Get next months date
-                nextMonth = (calendar.dateByAddingComponents(comps, toDate: today, options: []))!
+                nextMonth = ((calendar as NSCalendar).date(byAdding: comps, to: today, options: []))!
                 
                 let label = UILabel(frame: CGRect(x: index*110, y: dateLabelYPosition, width: 100, height: 20))
                 
-                let formatter = NSDateFormatter()
+                let formatter = DateFormatter()
                 formatter.dateFormat = "MMM"
-                let month = formatter.stringFromDate(nextMonth)
+                let month = formatter.string(from: nextMonth)
                 
                 label.font = dateFont
-                label.text = month.uppercaseString
+                label.text = month.uppercased()
                 label.textColor = chosenThemeTextColour
-                label.textAlignment = .Center
+                label.textAlignment = .center
                 
                 //Now add the line
-                let lineRect = CGRectMake(CGFloat(index*110), CGFloat(dateLabelYPosition), 0.5, scrollView.frame.size.height)
+                let lineRect = CGRect(x: CGFloat(index*110), y: CGFloat(dateLabelYPosition), width: 0.5, height: scrollView.frame.size.height)
                 let line = UIView(frame: lineRect)
                 line.backgroundColor = chosenThemeAccentColour
                 line.alpha = 0.4
@@ -240,27 +238,27 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             }
             
         case 1:
-            scrollView.contentSize = CGSizeMake((dateLabelLength * 40), 20)
+            scrollView.contentSize = CGSize(width: (dateLabelLength * 40), height: 20)
             var yearForLabel = Int(currentYear)
             var quarterCount = 0
             for index in 0...40
             {
-                quarterCount++
-                let qString = "Q" + String(quarterCount) + " " + String(yearForLabel!).uppercaseString
+                quarterCount += 1
+                let qString = "Q" + String(quarterCount) + " " + String(yearForLabel!).uppercased()
                 let label = UILabel(frame: CGRect(x: index * 110, y: dateLabelYPosition, width: 100, height: 20))
                 label.font = dateFont
                 label.text = qString
                 label.textColor = chosenThemeTextColour
-                label.textAlignment = .Center
+                label.textAlignment = .center
                 scrollView.addSubview(label)
                 if (index+1)%4 == 0
                 {
-                    yearForLabel!++
+                    yearForLabel! += 1
                     quarterCount = 0
                 }
                 
                 //Now add the line
-                let lineRect = CGRectMake(CGFloat(index*110), CGFloat(dateLabelYPosition), 0.5, scrollView.frame.size.height)
+                let lineRect = CGRect(x: CGFloat(index*110), y: CGFloat(dateLabelYPosition), width: 0.5, height: scrollView.frame.size.height)
                 let line = UIView(frame: lineRect)
                 line.backgroundColor = chosenThemeAccentColour
                 line.alpha = 0.4
@@ -268,7 +266,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             }
             
         case 2:
-            scrollView.contentSize = CGSizeMake((dateLabelLength * 10), 20)
+            scrollView.contentSize = CGSize(width: (dateLabelLength * 10), height: 20)
             let yearForLabel = Int(currentYear)
             for index in 0...10
             {
@@ -276,11 +274,11 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                 label.font = dateFont
                 label.text = String(yearForLabel! + index)
                 label.textColor = chosenThemeTextColour
-                label.textAlignment = .Center
+                label.textAlignment = .center
                 scrollView.addSubview(label)
                 
                 //Now add the line
-                let lineRect = CGRectMake(CGFloat(index*110), CGFloat(dateLabelYPosition), 0.5, scrollView.frame.size.height)
+                let lineRect = CGRect(x: CGFloat(index*110), y: CGFloat(dateLabelYPosition), width: 0.5, height: scrollView.frame.size.height)
                 let line = UIView(frame: lineRect)
                 line.backgroundColor = chosenThemeAccentColour
                 line.alpha = 0.4
@@ -296,23 +294,23 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
 
     
     /// @brief This function converts 20150901 to and NSDate()
-    func integerToNSDate(integerDate:String) -> NSDate
+    func integerToNSDate(_ integerDate:String) -> Date
     {
-        let calendar = NSCalendar.currentCalendar()
-        let today = NSDate()
-        let comp = calendar.components(.Month, fromDate: today)
-        let themonth = String(comp.month)
-        let comp2 = calendar.components(.Year, fromDate: today)
-        let theyear = String(comp2.year)
+        let calendar = Calendar.current
+        let today = Date()
+        let comp = (calendar as NSCalendar).components(.month, from: today)
+        let themonth = String(describing: comp.month)
+        let comp2 = (calendar as NSCalendar).components(.year, from: today)
+        let theyear = String(describing: comp2.year)
         let dateString = theyear + "-" + themonth + "-" + "01"
-        return NSDate(dateString: dateString)
+        return Date(dateString: dateString)
         
     }
     
     
     
     
-    func displayGoals(predicate:String)
+    func displayGoals(_ predicate:String)
     {
         //print("Fetching Goals. 🐯")
         
@@ -324,17 +322,17 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             let goals = realm.objects(Goal)
             //var goals = realm.objects(Goal).filter(predicate).sorted("date_added")
             
-            let formatter = NSDateFormatter()
-            let gbDateFormat = NSDateFormatter.dateFormatFromTemplate("MMddyyyy", options: 0, locale:NSLocale(localeIdentifier: "en-GB"))
+            let formatter = DateFormatter()
+            let gbDateFormat = DateFormatter.dateFormat(fromTemplate: "MMddyyyy", options: 0, locale:Locale(identifier: "en-GB"))
             formatter.dateFormat = gbDateFormat
             
             //Set up components for date calculations in for loop
-            let components = NSDateComponents()
-            let extracted = calendar.components([NSCalendarUnit.Month, .Year], fromDate: today)
+            var components = DateComponents()
+            let extracted = (calendar as NSCalendar).components([NSCalendar.Unit.month, .year], from: today)
             components.year = extracted.year
             components.month = extracted.month
             components.day = 01
-            let startOfThisMonth = calendar.dateFromComponents(components)
+            let startOfThisMonth = calendar.date(from: components)
             
             var heightOfContent = -50
             
@@ -376,17 +374,17 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             {
                 let label = UILabel(frame: CGRect(x: 0, y: 50, width: 300, height: 300))
                 label.font = timeLineLabelFont
-                label.textColor = UIColor.blackColor()
+                label.textColor = UIColor.black
                 label.numberOfLines = 3
                 
                 
                 if hiddenGoalsCount > 1
                 {
-                    label.text = NSLocalizedString("\(hiddenGoalsCount) goals have been hidden as they have an end date of less than a \(dateSwitcher.titleForSegmentAtIndex(dateSwitcher.selectedSegmentIndex)!) in length.", comment: "")
+                    label.text = NSLocalizedString("\(hiddenGoalsCount) goals have been hidden as they have an end date of less than a \(dateSwitcher.titleForSegment(at: dateSwitcher.selectedSegmentIndex)!) in length.", comment: "")
                 }
                 if hiddenGoalsCount == 1
                 {
-                    label.text = NSLocalizedString("\(hiddenGoalsCount) goal has been hidden as it has an end date of less than a \(dateSwitcher.titleForSegmentAtIndex(dateSwitcher.selectedSegmentIndex)!) in length.", comment: "")
+                    label.text = NSLocalizedString("\(hiddenGoalsCount) goal has been hidden as it has an end date of less than a \(dateSwitcher.titleForSegment(at: dateSwitcher.selectedSegmentIndex)!) in length.", comment: "")
                 }
                 
                 //Needed to position the label correctly. Interesting 😼.
@@ -398,7 +396,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                 let subViews = scrollView.subviews
                 for subview in subViews
                 {
-                    if subview.isMemberOfClass(TimeLineView) || subview.isMemberOfClass(TimeLineViewGoalLabel)
+                    if subview.isMember(of: TimeLineView) || subview.isMember(of: TimeLineViewGoalLabel)
                     {
                         //subview.frame.origin.y-=50
                     }
@@ -536,7 +534,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         let subViews = scrollView.subviews
         for subview in subViews
         {
-            if subview.isMemberOfClass(TimeLineView)
+            if subview.isMember(of: TimeLineView)
             {
                 subview.removeFromSuperview()
             }
@@ -544,7 +542,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         }
     }
     
-     @IBAction func changeTimeUnitOfTimeLine(segmentedControl:UISegmentedControl)
+     @IBAction func changeTimeUnitOfTimeLine(_ segmentedControl:UISegmentedControl)
     {
         switch segmentedControl.selectedSegmentIndex
         {
@@ -571,10 +569,10 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     //MARK - SCROLLING METHODS
     @IBAction func scrollToCurrentMonth()
     {
-        scrollView.setContentOffset(CGPointMake(0, 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         
         
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations:
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations:
             {
                 
             }, completion:
@@ -590,7 +588,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         let subViews = scrollView.subviews
         for subview in subViews
         {
-            if subview.isMemberOfClass(TimeLineViewGoalLabel)
+            if subview.isMember(of: TimeLineViewGoalLabel)
             {
                 subview.frame.origin.x = middleOfScreen.x - subview.frame.width/2
             }
@@ -603,11 +601,11 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     
     // MARK - SCROLLVIEW DELEGATE METHODS
     
-    func scrollViewDidScroll(scrollView: UIScrollView)
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         
         
-        for (index, timeline) in timeLinesArray.enumerate()
+        for (index, timeline) in timeLinesArray.enumerated()
         {
             middleOfScreen = (self.scrollView.frame.width/2 + scrollView.contentOffset.x, self.scrollView.frame.height/2 + scrollView.contentOffset.y)
             
@@ -641,13 +639,13 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         {
         case 0: // month
             let monthsPassed = floor(scrollView.contentOffset.x/dateLabelLength)
-            let comps = NSDateComponents()
+            var comps = DateComponents()
             comps.month = Int(monthsPassed)
-            let dateToMostLeft = (calendar.dateByAddingComponents(comps, toDate: today, options: []))!
+            let dateToMostLeft = ((calendar as NSCalendar).date(byAdding: comps, to: today, options: []))!
             //updateLabelsPositionsWhenScrolling(scrollView.contentOffset, timelinexPosition: 0)
-            let comp2 = calendar.components(.Year, fromDate: dateToMostLeft)
+            let comp2 = (calendar as NSCalendar).components(.year, from: dateToMostLeft)
             let year = comp2.year
-            self.navigationItem.leftBarButtonItem?.title = String(year)
+            self.navigationItem.leftBarButtonItem?.title = String(describing: year)
             
         case 1: // calender quarter
             let quarterJustPassed = floor(scrollView.contentOffset.x/dateLabelLength)
@@ -666,7 +664,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     }
     
     
-    func fadeTimeLine(offset: CGPoint, direction: DIRECTION)
+    func fadeTimeLine(_ offset: CGPoint, direction: DIRECTION)
     {
         for TL in timeLinesArray
         {
@@ -685,7 +683,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         }
     }
     
-    func updateLabelsPositionsWhenScrolling(offset: CGPoint, timelinexPosition: CGFloat)
+    func updateLabelsPositionsWhenScrolling(_ offset: CGPoint, timelinexPosition: CGFloat)
     {
         
         
@@ -711,68 +709,77 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     }
     
     
-    func editGoal(sender:UITapGestureRecognizer)
+    func editGoal(_ sender:UITapGestureRecognizer)
     {
-        let timeLineV = sender.view as! TimeLineView
-        performSegueWithIdentifier("showCreateEditView", sender: timeLineV.goal!)
+        //let timeLineV = sender.view as! TimeLineView
+        //performSegueWithIdentifier("showCreateEditView", sender: timeLineV.goal!)
+        
+        DispatchQueue.main.async(execute: { () -> Void in
+            let timeLineV = sender.view as! TimeLineView
+            self.performSegue(withIdentifier: "showCreateEditView", sender: timeLineV.goal!)
+        })
+
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if ((segue.identifier == "showCreateEditView" && (sender?.isMemberOfClass(UIBarButtonItem)) == false)) // This was invoked by tapping a TLView not the plus sign
+        if ((segue.identifier == "showCreateEditView" && ((sender as AnyObject).isMember(of: UIBarButtonItem)) == false)) // This was invoked by tapping a TLView not the plus sign
         {
             let goal : Goal = sender as! Goal
             //var vc = CreateEditGoals()
-            let vc = segue.destinationViewController as! CreateEditGoals
+            let vc = segue.destination as! CreateEditGoals
             vc.editableGoal = goal
             vc.userIsNew = false
             return
             
         }
-        
-        if (segue.identifier == "showCreateEditView" && sender?.isMemberOfClass(UIBarButtonItem) == true && timeLinesArray.count > 0)
+        else
         {
-            //This user is not new to this app as they have created TLViews before
-            let vc = segue.destinationViewController as! CreateEditGoals
-            vc.userIsNew = false
+            if (segue.identifier == "showCreateEditView" && (sender as AnyObject).isMember(of: UIBarButtonItem) == true && timeLinesArray.count > 0)
+            {
+                //This user is not new to this app as they have created TLViews before
+                let vc = segue.destination as! CreateEditGoals
+                vc.userIsNew = false
+            }
         }
+        
         
     }
     
-    func nsDateToDateString(date:NSDate) ->String
+    func nsDateToDateString(_ date:Date) ->String
     {
         // NSDate to 'Sep 2015'
         print("received : \(date)")
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        var formattedDateString = dateFormatter.stringFromDate(date)
+        var formattedDateString = dateFormatter.string(from: date)
         #if DEBUG
             print("step 0: \(formattedDateString)")
         #endif
         
 
-        formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
+        formattedDateString.remove(at: formattedDateString.characters.index(formattedDateString.startIndex, offsetBy: 3))
         #if DEBUG
             print("step 1: \(formattedDateString)")
         #endif
         
         
-        formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
+        formattedDateString.remove(at: formattedDateString.characters.index(formattedDateString.startIndex, offsetBy: 3))
         #if DEBUG
             print("step 2: \(formattedDateString)")
         #endif
         
         
-        formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
+        formattedDateString.remove(at: formattedDateString.characters.index(formattedDateString.startIndex, offsetBy: 3))
         #if DEBUG
             print("step 3 \(formattedDateString.uppercaseString)")
         #endif
         
         
-        return formattedDateString.uppercaseString
+        return formattedDateString.uppercased()
     }
 
     

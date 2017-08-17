@@ -11,11 +11,11 @@ import UIKit
 extension CreateEditGoals : UIScrollViewDelegate
     
 {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         notes.resignFirstResponder()
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //print("touched scroll view")
     }
 }

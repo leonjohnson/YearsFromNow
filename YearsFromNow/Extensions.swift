@@ -39,9 +39,9 @@ extension Int{
 extension String{
     var length:Int {return self.characters.count}
     
-    func containsString(s:String) -> Bool
+    func containsString(_ s:String) -> Bool
     {
-        if(self.rangeOfString(s) != nil)
+        if(self.range(of: s) != nil)
         {
             return true
         }
@@ -51,9 +51,9 @@ extension String{
         }
     }
     
-    func containsString(s:String, compareOption: NSStringCompareOptions) -> Bool
+    func containsString(_ s:String, compareOption: NSString.CompareOptions) -> Bool
     {
-        if((self.rangeOfString(s, options: compareOption)) != nil)
+        if((self.range(of: s, options: compareOption)) != nil)
         {
             return true
         }
@@ -83,95 +83,95 @@ extension UIView{
     var top:        CGFloat { return self.frame.origin.y }
     var bottom:     CGFloat { return self.frame.origin.y + self.frame.size.height }
     
-    func setWidth(width:CGFloat)
+    func setWidth(_ width:CGFloat)
     {
         self.frame.size.width = width
     }
     
-    func setHeight(height:CGFloat)
+    func setHeight(_ height:CGFloat)
     {
         self.frame.size.height = height
     }
     
-    func setSize(size:CGSize)
+    func setSize(_ size:CGSize)
     {
         self.frame.size = size
     }
     
-    func setOrigin(point:CGPoint)
+    func setOrigin(_ point:CGPoint)
     {
         self.frame.origin = point
     }
     
-    func setX(x:CGFloat) //only change the origin x
+    func setX(_ x:CGFloat) //only change the origin x
     {
-        self.frame.origin = CGPointMake(x, self.frame.origin.y)
+        self.frame.origin = CGPoint(x: x, y: self.frame.origin.y)
     }
     
-    func setY(y:CGFloat) //only change the origin x
+    func setY(_ y:CGFloat) //only change the origin x
     {
-        self.frame.origin = CGPointMake(self.frame.origin.x, y)
+        self.frame.origin = CGPoint(x: self.frame.origin.x, y: y)
     }
     
-    func setCenterX(x:CGFloat) //only change the origin x
+    func setCenterX(_ x:CGFloat) //only change the origin x
     {
-        self.center = CGPointMake(x, self.center.y)
+        self.center = CGPoint(x: x, y: self.center.y)
     }
     
-    func setCenterY(y:CGFloat) //only change the origin x
+    func setCenterY(_ y:CGFloat) //only change the origin x
     {
-        self.center = CGPointMake(self.center.x, y)
+        self.center = CGPoint(x: self.center.x, y: y)
     }
     
-    func roundCorner(radius:CGFloat)
+    func roundCorner(_ radius:CGFloat)
     {
         self.layer.cornerRadius = radius
     }
     
-    func setTop(top:CGFloat)
+    func setTop(_ top:CGFloat)
     {
         self.frame.origin.y = top
     }
     
-    func setLeft(left:CGFloat)
+    func setLeft(_ left:CGFloat)
     {
         self.frame.origin.x = left
     }
     
-    func setRight(right:CGFloat)
+    func setRight(_ right:CGFloat)
     {
         self.frame.origin.x = right - self.frame.size.width
     }
     
-    func setBottom(bottom:CGFloat)
+    func setBottom(_ bottom:CGFloat)
     {
         self.frame.origin.y = bottom - self.frame.size.height
     }
 }
 
-extension NSDate{
-    func daysInBetweenDate(date: NSDate) -> Double
+extension Date{
+    func daysInBetweenDate(_ date: Date) -> Double
     {
         var diff = self.timeIntervalSinceNow - date.timeIntervalSinceNow
         diff = fabs(diff/86400)
         return diff
     }
     
-    func hoursInBetweenDate(date: NSDate) -> Double
+    func hoursInBetweenDate(_ date: Date) -> Double
     {
         var diff = self.timeIntervalSinceNow - date.timeIntervalSinceNow
         diff = fabs(diff/3600)
         return diff
     }
     
-    func minutesInBetweenDate(date: NSDate) -> Double
+    func minutesInBetweenDate(_ date: Date) -> Double
     {
         var diff = self.timeIntervalSinceNow - date.timeIntervalSinceNow
         diff = fabs(diff/60)
         return diff
     }
     
-    func secondsInBetweenDate(date: NSDate) -> Double
+    func secondsInBetweenDate(_ date: Date) -> Double
     {
         var diff = self.timeIntervalSinceNow - date.timeIntervalSinceNow
         diff = fabs(diff)
@@ -179,13 +179,13 @@ extension NSDate{
     }
     
     
-    convenience
+    
     init(dateString:String) {
-        let dateStringFormatter = NSDateFormatter()
+        let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd"
-        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let d = dateStringFormatter.dateFromString(dateString)!
-        self.init(timeInterval:0, sinceDate:d)
+        dateStringFormatter.locale = Locale(identifier: "en_US_POSIX")
+        let d = dateStringFormatter.date(from: dateString)!
+        (self as NSDate).init(timeInterval:0, since:d)
     }
     
 }
@@ -200,11 +200,11 @@ extension UIImageView{
 }
 
 extension UIImage{
-    func croppedImage(bound : CGRect) -> UIImage
+    func croppedImage(_ bound : CGRect) -> UIImage
     {
-        let scaledBounds : CGRect = CGRectMake(bound.origin.x * self.scale, bound.origin.y * self.scale, bound.size.width * self.scale, bound.size.height * self.scale)
-        let imageRef = CGImageCreateWithImageInRect(self.CGImage, scaledBounds)
-        let croppedImage : UIImage = UIImage(CGImage: imageRef!, scale: self.scale, orientation: UIImageOrientation.Up)
+        let scaledBounds : CGRect = CGRect(x: bound.origin.x * self.scale, y: bound.origin.y * self.scale, width: bound.size.width * self.scale, height: bound.size.height * self.scale)
+        let imageRef = self.cgImage?.cropping(to: scaledBounds)
+        let croppedImage : UIImage = UIImage(cgImage: imageRef!, scale: self.scale, orientation: UIImageOrientation.up)
         return croppedImage;
     }
     

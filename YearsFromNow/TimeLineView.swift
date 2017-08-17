@@ -16,21 +16,21 @@ class TimeLineView: UIView {
    
     
     
-    override func drawRect(rect: CGRect)
+    override func draw(_ rect: CGRect)
     {
         // An empty implementation adversely affects performance during animation.
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.black
         self.alpha = 0.5
     }
     
     func fadeOut()
     {
-        self.backgroundColor = UIColor.greenColor()
+        self.backgroundColor = UIColor.green
     }
     
     func fadeIn()
     {
-        self.backgroundColor = UIColor.redColor()
+        self.backgroundColor = UIColor.red
         self.alpha = 0.5
     }
     

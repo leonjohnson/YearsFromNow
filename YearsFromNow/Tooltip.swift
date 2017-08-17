@@ -15,22 +15,22 @@ class Tooltip: UIView
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     
-    override func drawRect(rect: CGRect)
+    override func draw(_ rect: CGRect)
     {
         //// Rectangle Drawing
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.alpha = 0.8
-        let rectanglePath = UIBezierPath(roundedRect: CGRectMake(0, 0, self.frame.width, self.frame.height), cornerRadius: 20)
-        UIColor.whiteColor().setFill()
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), cornerRadius: 20)
+        UIColor.white.setFill()
         rectanglePath.fill()
     }
     
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView?
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView?
     {
-        let hitView = super.hitTest(point, withEvent: event)
+        let hitView = super.hitTest(point, with: event)
         
-        UIView.animateWithDuration(1, delay: 0, options: .CurveEaseOut, animations:
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations:
             {
                 //shoot down
                 self.frame.origin.y += 200

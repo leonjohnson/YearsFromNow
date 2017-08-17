@@ -14,17 +14,17 @@ class TimeLineScrollView: UIScrollView {
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // Drawing code
         
         let context = UIGraphicsGetCurrentContext()
-        CGContextBeginPath(context)
-        CGContextMoveToPoint(context, dateLabelLength, 0)
-        CGContextAddLineToPoint(context, dateLabelLength, self.frame.size.height)
-        CGContextClosePath(context)
-        CGContextSetLineWidth(context, 1.0)
-        CGContextSetRGBStrokeColor(context, 1.0, 0.5, 0.7, 1.0)
-        CGContextDrawPath(context, .Stroke)
+        context?.beginPath()
+        context?.move(to: CGPoint(x: dateLabelLength, y: 0))
+        context?.addLine(to: CGPoint(x: dateLabelLength, y: self.frame.size.height))
+        context?.closePath()
+        context?.setLineWidth(1.0)
+        context?.setStrokeColor(red: 1.0, green: 0.5, blue: 0.7, alpha: 1.0)
+        context?.drawPath(using: .stroke)
         
     }
     

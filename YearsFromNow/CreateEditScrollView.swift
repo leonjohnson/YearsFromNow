@@ -11,9 +11,9 @@ import UIKit
 class CreateEditScrollView: UIScrollView
 {
 
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView?
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView?
     {
-        let hitView = super.hitTest(point, withEvent: event)
+        let hitView = super.hitTest(point, with: event)
         
         
         if hitView == self

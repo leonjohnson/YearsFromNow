@@ -32,13 +32,13 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     var editableGoal:Goal?
     
     
-    var events : [(event: String, date: String, nsdate: NSDate)] = []
+    var events : [(event: String, date: String, nsdate: Date)] = []
     var selectedEndMonth : String = ""
     var selecetdEndYear : String = ""
     var txt : String = ""
     
     
-    var comp : NSDateComponents = NSDateComponents()
+    var comp : DateComponents = DateComponents()
     var currentYear : Int = 0
     var currentMonth : Int = 0
     
@@ -53,7 +53,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     
     var cancelEntryFlagRaised : Bool = false
     
-    var dateFormatter = NSDateFormatter()
+    var dateFormatter = DateFormatter()
     
     var currentEventToBeEdited : Int?
     
@@ -86,7 +86,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         
         // Set scrollview settings
-        scrollView.contentSize = CGSizeMake(scrollView.contentSize.width,scrollView.frame.size.height);
+        scrollView.contentSize = CGSize(width: scrollView.contentSize.width,height: scrollView.frame.size.height);
         scrollView.bounces = false
         
         //Cursor colour
@@ -96,9 +96,9 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         let nextResponder : UIResponder = notes
         nextResponder.becomeFirstResponder()
         
-        comp = calendar.components(.Year, fromDate: today)
-        currentYear = comp.year
-        currentMonth = calendar.components(.Month, fromDate: today).month - 1
+        comp = (calendar as NSCalendar).components(.year, from: today)
+        currentYear = comp.year!
+        currentMonth = (calendar as NSCalendar).components(.month, from: today).month - 1
         
         
         
@@ -119,22 +119,22 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         endDatePicker.dataSource = self
         endDatePicker.delegate = self
-        endDatePicker.hidden = true
+        endDatePicker.isHidden = true
         
         
         
-        let scrollableSize = CGSizeMake(320, self.view.frame.size.height);
+        let scrollableSize = CGSize(width: 320, height: self.view.frame.size.height);
         scrollView.contentSize = scrollableSize
         
 
         
-        let endDateViewTap = UITapGestureRecognizer(target: self, action: "animateEndDateView")
+        let endDateViewTap = UITapGestureRecognizer(target: self, action: #selector(CreateEditGoals.animateEndDateView))
         //endDateView.userInteractionEnabled = true
         self.endDateView.addGestureRecognizer(endDateViewTap)
 
         
         notes.font = standardFont
-        notes.backgroundColor = UIColor.clearColor()
+        notes.backgroundColor = UIColor.clear
         notes.contentInset = UIEdgeInsetsMake(0, -4, 0, 0)
         notes.delegate = self
         notes.scrollRangeToVisible(NSMakeRange(0, 0))
@@ -151,12 +151,12 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         //rgb(113,102,169)
         
         deleteGoalButton.backgroundColor = chosenThemeButtonColour
-        deleteGoalButton.setTitleColor(chosenThemeTextColour, forState: .Normal)
+        deleteGoalButton.setTitleColor(chosenThemeTextColour, for: UIControlState())
         deleteGoalButton.titleLabel?.font = systemFontBold15
         
         
-        scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
-        let theTap = UITapGestureRecognizer(target: self, action: "scrollViewTapped:")
+        scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        let theTap = UITapGestureRecognizer(target: self, action: #selector(CreateEditGoals.scrollViewTapped(_:)))
         scrollView.addGestureRecognizer(theTap)
         
 
@@ -167,29 +167,29 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillDisappear(animated: Bool)
+    override func viewWillDisappear(_ animated: Bool)
     {
         editableGoal = nil
     }
     
-    func scrollViewTapped(recognizer: UIGestureRecognizer) {
+    func scrollViewTapped(_ recognizer: UIGestureRecognizer) {
         scrollView.endEditing(true)
     }
     
     
     
-    func dismissTooltip(sender:UITapGestureRecognizer)
+    func dismissTooltip(_ sender:UITapGestureRecognizer)
     {
         let subViews = scrollView.subviews
         for subview in subViews{
-            if subview.isMemberOfClass(Tooltip)
+            if subview.isMember(of: Tooltip)
             {
                 subview.removeFromSuperview()
             }
         }
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         
         if userIsNew ==  false
@@ -200,20 +200,20 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         if editableGoal != nil
         {
             //Show the delete button as this an edit
-            deleteGoalButton.hidden = false
+            deleteGoalButton.isHidden = false
             
             //Set the end date to that in the database
-            endDate.text = nsDateToDateString(editableGoal!.end_date)
-            let month_abb = endDate.text?.componentsSeparatedByString(" ")[0]
+            endDate.text = nsDateToDateString(editableGoal!.end_date as Date)
+            let month_abb = endDate.text?.components(separatedBy: " ")[0]
             
             //Set the var correctly
-            currentlyDisplayedMonthIndex = months.indexOf(month_abb!)!
-            let displayedYear = Int((endDate.text?.componentsSeparatedByString(" ")[1])!)
+            currentlyDisplayedMonthIndex = months.index(of: month_abb!)!
+            let displayedYear = Int((endDate.text?.components(separatedBy: " ")[1])!)
             currentlyDisplayedYearIndex = displayedYear! - currentYear
         }
         else
         {
-            deleteGoalButton.hidden = true
+            deleteGoalButton.isHidden = true
         }
         
         
@@ -222,11 +222,11 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         if let _ = editableGoal?.notes
         {
             notes.text = editableGoal!.notes
-            doneButton.enabled = true
+            doneButton.isEnabled = true
             
             
             let predicate = NSPredicate(format: "SELF CONTAINS %@", argumentArray: ["\n"])
-            newLineExists = predicate.evaluateWithObject(editableGoal!.notes)
+            newLineExists = predicate.evaluate(with: editableGoal!.notes)
             
             if newLineExists == false
             {
@@ -234,23 +234,23 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             }
             else
             {
-                let rangeOfNewLine = (editableGoal!.notes as NSString).rangeOfCharacterFromSet(NSCharacterSet.newlineCharacterSet())
+                let rangeOfNewLine = (editableGoal!.notes as NSString).rangeOfCharacter(from: CharacterSet.newlines)
                 
                 // HEADER
                 let location = rangeOfNewLine.location
                 //let length = (editableGoal!.notes.characters.count - rangeOfNewLine.location)
                 let range = NSMakeRange(0, location)
-                let headerAttributedString = notes.attributedText.attributedSubstringFromRange(range)
+                let headerAttributedString = notes.attributedText.attributedSubstring(from: range)
                 
                 // BODY
                 let bodyRange = NSMakeRange(location, editableGoal!.notes.characters.count - location)
-                let bodyString = (notes.text as NSString).substringWithRange(bodyRange)
+                let bodyString = (notes.text as NSString).substring(with: bodyRange)
                 let bodyattributedString = NSAttributedString(string:bodyString, attributes:standardAttributes)
                 
                 
                 let newAttributedString = NSMutableAttributedString()
-                newAttributedString.appendAttributedString(headerAttributedString)
-                newAttributedString.appendAttributedString(bodyattributedString)
+                newAttributedString.append(headerAttributedString)
+                newAttributedString.append(bodyattributedString)
                 notes.attributedText = newAttributedString
                 
             }
@@ -258,28 +258,28 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         else
         {
             notes.text = String(PLACEHOLDER_TEXT)
-            doneButton.enabled = false
+            doneButton.isEnabled = false
         }
         
         notes.selectedRange = NSMakeRange(0, 0);
 
     }
     
-    override func shouldAutorotate() -> Bool
+    override var shouldAutorotate : Bool
     {
         return false
     }
     
     
-    func getMonthAndYearFromNSDate(date: NSDate) -> [String]
+    func getMonthAndYearFromNSDate(_ date: Date) -> [String]
     {
         var dateArray : [String] = Array()
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM"
         
-        dateArray.append(dateFormatter.stringFromDate(date))
+        dateArray.append(dateFormatter.string(from: date))
         dateFormatter.dateFormat = "YYYY"
-        dateArray.append(dateFormatter.stringFromDate(date))
+        dateArray.append(dateFormatter.string(from: date))
         
         return dateArray
     }
@@ -289,7 +289,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     
     @IBAction func cancelInsert()
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -299,44 +299,44 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     /*
     DATE CONVERSION METHODS
     */
-    func dateStringToNSDate(dateStringParameter:String) ->NSDate
+    func dateStringToNSDate(_ dateStringParameter:String) ->Date
     {
         // 'Sep 2015' to NSDate
         var dateString = dateStringParameter
-        dateString  = dateString.stringByReplacingOccurrencesOfString(" ", withString: " 01, ")
+        dateString  = dateString.replacingOccurrences(of: " ", with: " 01, ")
         //dateString.insert(" 01", atIndex: dateString.startIndex.advancedBy(3))
         //dateString.splice(" 01,", atIndex: dateString.startIndex.advancedBy(3))
-        let dateFormatter2 = NSDateFormatter()
+        let dateFormatter2 = DateFormatter()
         //http://stackoverflow.com/questions/28382482/ios-app-crashes-on-phone-but-works-fine-on-simulator
-        dateFormatter2.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter2.locale = Locale(identifier: "en_US_POSIX")
         
-        dateFormatter2.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter2.timeStyle = NSDateFormatterStyle.NoStyle
-        let thedate = dateFormatter2.dateFromString(dateString)
+        dateFormatter2.dateStyle = DateFormatter.Style.medium
+        dateFormatter2.timeStyle = DateFormatter.Style.none
+        let thedate = dateFormatter2.date(from: dateString)
         return thedate!
     }
     
-    func nsDateToDateString(date:NSDate) ->String
+    func nsDateToDateString(_ date:Date) ->String
     {
         // NSDate to 'Sep 2015'
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.none
         //http://stackoverflow.com/questions/28382482/ios-app-crashes-on-phone-but-works-fine-on-simulator
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        var formattedDateString = dateFormatter.stringFromDate(date)
-        formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
-        formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
-        formattedDateString.removeAtIndex(formattedDateString.startIndex.advancedBy(3))
-        return formattedDateString.uppercaseString
+        var formattedDateString = dateFormatter.string(from: date)
+        formattedDateString.remove(at: formattedDateString.characters.index(formattedDateString.startIndex, offsetBy: 3))
+        formattedDateString.remove(at: formattedDateString.characters.index(formattedDateString.startIndex, offsetBy: 3))
+        formattedDateString.remove(at: formattedDateString.characters.index(formattedDateString.startIndex, offsetBy: 3))
+        return formattedDateString.uppercased()
     }
     /*
     DATE CONVERSION METHODS
     */
     
     
-    @IBAction func closeEditScreen(sender:AnyObject)
+    @IBAction func closeEditScreen(_ sender:AnyObject)
     {
         validateGoalEntryDate()
     }
@@ -349,18 +349,18 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         if (currentlyDisplayedMonthIndex == currentMonth) && (currentlyDisplayedYearIndex == 0)
         {
-            alertController = UIAlertController(title: "Are you sure?", message: "Did you mean to select an End Date for this month?", preferredStyle: .Alert)
+            alertController = UIAlertController(title: "Are you sure?", message: "Did you mean to select an End Date for this month?", preferredStyle: .alert)
             
-            let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (_) -> Void in
+            let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default) { (_) -> Void in
                 
                 if self.validateGoalEntryText() == true
                 {
                     self.saveGoal()
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
             
-            let noAction = UIAlertAction(title: "No", style: UIAlertActionStyle.Default) { (_) -> Void in
+            let noAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default) { (_) -> Void in
                 
                // print("hitting false")
             }
@@ -368,14 +368,14 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             alertController?.addAction(yesAction)
             alertController?.addAction(noAction)
             
-            self.presentViewController(alertController!, animated: true, completion: nil)
+            self.present(alertController!, animated: true, completion: nil)
         }
         else
         {
             if self.validateGoalEntryText() == true
             {
                 self.saveGoal()
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         }
         
@@ -391,10 +391,10 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             {
                 //print("THEY ARE EQUAL")
             }
-            alertController = UIAlertController(title: "Describe your goal", message: "Please describe your goal before attempting to save it", preferredStyle: .Alert)
-            let ok  = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController = UIAlertController(title: "Describe your goal", message: "Please describe your goal before attempting to save it", preferredStyle: .alert)
+            let ok  = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             alertController?.addAction(ok)
-            self.presentViewController(alertController!, animated: true, completion: nil)
+            self.present(alertController!, animated: true, completion: nil)
             return false
         }
             
@@ -438,7 +438,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             //print("CREATING A NEW RECORD")
             let goal = Goal()
             goal.notes = self.notes.text
-            goal.start_date = NSDate()
+            goal.start_date = Date()
             
             goal.end_date = dateStringToNSDate(endDate.text!)
             
@@ -476,26 +476,26 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                 print(error)
             }
         }
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
     
     
     // MARK: - Notes Field methods
-    func getNotesTitle(thenotes:String) -> NSAttributedString
+    func getNotesTitle(_ thenotes:String) -> NSAttributedString
     {
         var notesTitle : NSMutableAttributedString = NSMutableAttributedString()
         let predicate = NSPredicate(format: "SELF CONTAINS %@", argumentArray: ["\n"])
-        newLineExists = predicate.evaluateWithObject(thenotes)
+        newLineExists = predicate.evaluate(with: thenotes)
         if newLineExists == true
         {
             // HEADER
-            let rangeOfNewLine = (notes.text as NSString).rangeOfCharacterFromSet(NSCharacterSet.newlineCharacterSet())
+            let rangeOfNewLine = (notes.text as NSString).rangeOfCharacter(from: CharacterSet.newlines)
             let location = rangeOfNewLine.location
             //let length = (notes.text.characters.count - rangeOfNewLine.location)
             let range = NSMakeRange(0, location)
-            let substring = (thenotes as NSString).substringWithRange(range)
+            let substring = (thenotes as NSString).substring(with: range)
             notesTitle = NSMutableAttributedString(string:substring, attributes:headerAttributes)
         }
         else
@@ -533,12 +533,12 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         if let _ = editableGoal
         {
-            monthToShow = calendar.components(.Month, fromDate:editableGoal!.end_date).month-1
-            yearToShow = calendar.components(.Year, fromDate:editableGoal!.end_date).year - currentYear
+            monthToShow = (calendar as NSCalendar).components(.month, from:editableGoal!.end_date).month-1
+            yearToShow = (calendar as NSCalendar).components(.year, from:editableGoal!.end_date).year - currentYear
             
         }
         
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations:
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations:
             {
                 self.endDateView.frame.size.height += distanceToAnimateView
                 
@@ -554,7 +554,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             {
                 finished in
                 self.endDateViewExpanded = !self.endDateViewExpanded
-                self.endDatePicker.hidden = !self.endDatePicker.hidden
+                self.endDatePicker.isHidden = !self.endDatePicker.isHidden
             }
         )
         
@@ -567,14 +567,14 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
 
     // MARK: - TEXTFIELD / TEXTVIEW DELEGATE METHODS
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
        return true
     }
     
     
     
-    func textFieldDidBeginEditing(textField: UITextField)
+    func textFieldDidBeginEditing(_ textField: UITextField)
     {
         //scrollView.setContentOffset(CGPointMake(0, 50), animated: true)
         //println("pushed up")
@@ -584,18 +584,18 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     
 
     
-    func textFieldDidEndEditing(textField: UITextField)
+    func textFieldDidEndEditing(_ textField: UITextField)
     {
         txt = textField.text!
     }
     
-    func textViewDidBeginEditing(textView: UITextView)
+    func textViewDidBeginEditing(_ textView: UITextView)
     {
         
     
     }
     
-    func textViewDidEndEditing(textView: UITextView)
+    func textViewDidEndEditing(_ textView: UITextView)
     {
         if textView.text.isEmpty
         {
@@ -603,20 +603,20 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         }
         else
         {
-            textView.textColor = UIColor.blackColor()
+            textView.textColor = UIColor.black
         }
     }
     
     
     
-    func textViewDidChange(textView: UITextView)
+    func textViewDidChange(_ textView: UITextView)
     {
         
         
         
         
         let predicate = NSPredicate(format: "SELF CONTAINS %@", argumentArray: ["\n"])
-        newLineExists = predicate.evaluateWithObject(notes.text)
+        newLineExists = predicate.evaluate(with: notes.text)
         
         if newLineExists == false
         {
@@ -627,39 +627,39 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                 textView.text = PLACEHOLDER_TEXT
                 textView.font = standardFont
                 textView.textColor = chosenThemePlaceholderTextColour
-                doneButton.enabled = false
+                doneButton.isEnabled = false
             }
         }
         else
         {
-            let rangeOfNewLine = (notes.text as NSString).rangeOfCharacterFromSet(NSCharacterSet.newlineCharacterSet())
+            let rangeOfNewLine = (notes.text as NSString).rangeOfCharacter(from: CharacterSet.newlines)
             
             // HEADER
             let location = rangeOfNewLine.location
             //let length = (notes.text.characters.count - rangeOfNewLine.location)
             let range = NSMakeRange(0, location)
             //println("range of header text: \(range).")
-            let headerAttributedString = notes.attributedText.attributedSubstringFromRange(range)
+            let headerAttributedString = notes.attributedText.attributedSubstring(from: range)
             
             // BODY
             let bodyRange = NSMakeRange(location, notes.text.characters.count - location)
             
             //println("range of standard text: \(bodyRange).")
             
-            let bodyString = (notes.text as NSString).substringWithRange(bodyRange)
+            let bodyString = (notes.text as NSString).substring(with: bodyRange)
             let bodyattributedString = NSAttributedString(string:bodyString, attributes:standardAttributes)
             
             //println("bodyattributedString: \(bodyattributedString). headerAttributedString: \(headerAttributedString)")
             
             let newAttributedString = NSMutableAttributedString()
-            newAttributedString.appendAttributedString(headerAttributedString)
-            newAttributedString.appendAttributedString(bodyattributedString)
+            newAttributedString.append(headerAttributedString)
+            newAttributedString.append(bodyattributedString)
             notes.attributedText = newAttributedString
             
         }
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
     {
         // The text view calls this method whenever the user types a new character or deletes an existing character.
         
@@ -672,7 +672,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         if textView.text == PLACEHOLDER_TEXT
         {
             textView.text = "";
-            doneButton.enabled = true
+            doneButton.isEnabled = true
         }
         return true
     }
