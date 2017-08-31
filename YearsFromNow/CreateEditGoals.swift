@@ -66,7 +66,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     var openedBefore = false
     var userIsNew:Bool?
     
-    var alertController = UIAlertController?()
+    var alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
     
     
 
@@ -98,7 +98,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         comp = (calendar as NSCalendar).components(.year, from: today)
         currentYear = comp.year!
-        currentMonth = (calendar as NSCalendar).components(.month, from: today).month - 1
+        currentMonth = (calendar as NSCalendar).components(.month, from: today).month! - 1
         
         
         
@@ -365,10 +365,10 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                // print("hitting false")
             }
             
-            alertController?.addAction(yesAction)
-            alertController?.addAction(noAction)
+            alertController.addAction(yesAction)
+            alertController.addAction(noAction)
             
-            self.present(alertController!, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
         else
         {
@@ -393,8 +393,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             }
             alertController = UIAlertController(title: "Describe your goal", message: "Please describe your goal before attempting to save it", preferredStyle: .alert)
             let ok  = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-            alertController?.addAction(ok)
-            self.present(alertController!, animated: true, completion: nil)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
             return false
         }
             
@@ -419,7 +419,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                 
                 try realm.write
                     {
-                        self.notes.text = self.notes.text.componentsSeparatedByString("*").joinWithSeparator("#")
+                        self.notes.text = self.notes.text.components(separatedBy: ("*")).joined()
+                        //self.notes.text = self.notes.text.componentsSeparatedByString("*").joinWithSeparator("#")
                         self.editableGoal?.notes = self.notes.text
                         self.editableGoal?.end_date = self.dateStringToNSDate(self.endDate.text!)
                 }
@@ -533,8 +534,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         if let _ = editableGoal
         {
-            monthToShow = (calendar as NSCalendar).components(.month, from:editableGoal!.end_date).month-1
-            yearToShow = (calendar as NSCalendar).components(.year, from:editableGoal!.end_date).year - currentYear
+            monthToShow = (calendar as NSCalendar).components(.month, from:editableGoal!.end_date).month!-1
+            yearToShow = (calendar as NSCalendar).components(.year, from:editableGoal!.end_date).year! - currentYear
             
         }
         

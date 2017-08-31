@@ -19,6 +19,8 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var createNewGoalButtonItem: UIBarButtonItem!
     @IBOutlet weak var toolTip : Tooltip!
+    @IBOutlet weak var calendarButton : UIButton!
+    @IBOutlet weak var newGoalButton : UIButton!
     
     let calendar = Calendar.current
     let today = Date()
@@ -32,6 +34,8 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     var lastYContentOffset : CGFloat = 0
     
     
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -40,7 +44,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         createNewGoalButtonItem.tintColor = chosenThemeAccentColour
         self.navigationItem.leftBarButtonItem?.tintColor = chosenThemeAccentColour
         
-        // Do any additional setup after loading the view, typically from a nib.
+        // Navbar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -48,26 +52,38 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         navigationController?.navigationBar.isHidden = false
         
         
-
-        let attributes = [NSFontAttributeName:lightFont]
+        //Date switcher
+        
+        let yearLabelAttributes = [NSFontAttributeName:yearFont, NSForegroundColorAttributeName:UIColor.white]
+        let attributes = [NSFontAttributeName:mediumFont, NSForegroundColorAttributeName:UIColor.white]
         let newAttributes = [NSFontAttributeName:systemFontBold13, NSForegroundColorAttributeName:UIColor.gray]
-        dateSwitcher.setTitleTextAttributes(attributes, for: UIControlState())
+        
+        dateSwitcher.setTitleTextAttributes(attributes, for: .normal)
         dateSwitcher.setTitleTextAttributes(newAttributes, for: .selected)
-        let comp = (calendar as NSCalendar).components([.year, NSCalendar.Unit.month] , from: today)
-        currentYear = String(describing: comp.year).uppercased()
+        let comp = (calendar as Calendar).dateComponents([.year, .month], from: today)
+        currentYear = String(describing: comp.year!).uppercased()
+        
         self.navigationItem.leftBarButtonItem?.title = currentYear
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(yearLabelAttributes, for: .normal)
         
+        //Button bar
+        let calendarImage = #imageLiteral(resourceName: "calendar")
+        calendarButton.setImage(calendarImage, for: .normal)
+        calendarButton.tintColor = UIColor.white
         
+        let addGoalImage = #imageLiteral(resourceName: "add")
+        newGoalButton.setImage(addGoalImage, for: .normal)
+        newGoalButton.tintColor = UIColor.white
         
-        switch comp.month
+        switch comp.month!
         {
-        case ?1,?2,?3:
+        case 1,2,3:
             currentQuarter = 1
-        case ?4,?5,?6:
+        case 4,5,6:
             currentQuarter = 2
-        case ?7,?8,?9:
+        case 7,8,9:
             currentQuarter = 3
-        case ?10,?11,?12:
+        case 10,11,12:
             currentQuarter = 4
         default:
             currentQuarter = -1
@@ -77,7 +93,11 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         
-        
+        //Set the background image
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "background.png")
+        backgroundImage.contentMode = UIViewContentMode.topLeft
+        self.view.insertSubview(backgroundImage, at: 0)
         
         
     }
@@ -163,12 +183,6 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         }
         
         
-        
-
-        
-        
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -200,7 +214,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         // get 10 years from now
         var comps = DateComponents()
         comps.month = 1
-        
+        print("called, with : %@", dateSwitcher.selectedSegmentIndex)
         var nextMonth : Date
         switch dateSwitcher.selectedSegmentIndex
         {
@@ -233,8 +247,6 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                 
                 scrollView.addSubview(label)
                 dateLabelArray.append(label) // so we can iterate on this labels for repositioning easily.
-                
-                
             }
             
         case 1:
@@ -319,7 +331,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         {
             let realm = try Realm()
             
-            let goals = realm.objects(Goal)
+            let goals = realm.objects(Goal.self)
             //var goals = realm.objects(Goal).filter(predicate).sorted("date_added")
             
             let formatter = DateFormatter()
@@ -328,7 +340,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             
             //Set up components for date calculations in for loop
             var components = DateComponents()
-            let extracted = (calendar as NSCalendar).components([NSCalendar.Unit.month, .year], from: today)
+            let extracted = (calendar as Calendar).dateComponents([.month, .year], from: today)
             components.year = extracted.year
             components.month = extracted.month
             components.day = 01
@@ -342,9 +354,10 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             for goalRetrieved: Goal in goals
             {
                 // CALCULATE THE NUMBER OF MONTHS BETWEEN TODAY(1st) AND THE GOALS END_DATE (31st)
-                let timeDifference = calendar.components([NSCalendarUnit.Month, .Year], fromDate: startOfThisMonth!, toDate: goalRetrieved.end_date, options: [])
+                let timeDifference = calendar.dateComponents([.month, .year], from: startOfThisMonth!, to: goalRetrieved.end_date)
+                //OLD CODElet timeDifference = calendar.dateComponents([.Month, .Year], fromDate: startOfThisMonth!, toDate: goalRetrieved.end_date)
                 
-                let monthsRemaining : CGFloat = CGFloat((timeDifference.year*12) + timeDifference.month + 1) // add one so we include this month as 1 whole month. See playground4 code for more.
+                let monthsRemaining : CGFloat = CGFloat((timeDifference.year!*12) + timeDifference.month! + 1) // add one so we include this month as 1 whole month. See playground4 code for more.
                 
                 var w : CGFloat = 0.0
                 switch dateSwitcher.selectedSegmentIndex
@@ -362,7 +375,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                 if w < dateLabelLength
                 {
                     // This goal needs goal needs to be hidden as it has an end date of less than a 'quarter/month/year' in length
-                    hiddenGoalsCount++
+                    hiddenGoalsCount+=1
                 }
                 
                 
@@ -396,7 +409,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                 let subViews = scrollView.subviews
                 for subview in subViews
                 {
-                    if subview.isMember(of: TimeLineView) || subview.isMember(of: TimeLineViewGoalLabel)
+                    if subview.isMember(of: TimeLineView.self) || subview.isMember(of: TimeLineViewGoalLabel.self)
                     {
                         //subview.frame.origin.y-=50
                     }
@@ -410,9 +423,10 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             for goalRetrieved: Goal in goals
             {
                 // CALCULATE THE NUMBER OF MONTHS BETWEEN TODAY(1st) AND THE GOALS END_DATE (31st)
-                let timeDifference = calendar.components([NSCalendarUnit.Month, .Year], fromDate: startOfThisMonth!, toDate: goalRetrieved.end_date, options: [])
+                // OLD CODE let timeDifference = calendar.components([NSCalendar.Unit.Month, .Year], fromDate: startOfThisMonth!, toDate: goalRetrieved.end_date, options: [])
+                let timeDifference = calendar.dateComponents([.month, .year], from: startOfThisMonth!, to: goalRetrieved.end_date)
                 
-                let monthsRemaining : CGFloat = CGFloat((timeDifference.year*12) + timeDifference.month + 1) // add one so we include this month as 1 whole month. See playground4 code for more.
+                let monthsRemaining : CGFloat = CGFloat((timeDifference.year!*12) + timeDifference.month! + 1) // add one so we include this month as 1 whole month. See playground4 code for more.
                 
                 var w : CGFloat = 0.0
                 switch dateSwitcher.selectedSegmentIndex
@@ -448,7 +462,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                         yCoordiante+=100
                     }
                     let timeLineView = TimeLineView(frame: CGRect(x:0, y: Int(yCoordiante), width: Int(w), height:timeLineHeight))
-                    timeLineView.backgroundColor = UIColor.blackColor()
+                    timeLineView.backgroundColor = UIColor.black
                     timeLineView.alpha = 0.5
                     timeLineView.tag = loopProducingTimeLineView
                     
@@ -493,14 +507,14 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                     timeLineLabelsArray.append(label)
                     
                     
-                    let timeLineTap = UITapGestureRecognizer(target: self, action: "editGoal:")
-                    timeLineView.userInteractionEnabled = true
+                    let timeLineTap = UITapGestureRecognizer(target: self, action: #selector(DisplayGoals.editGoal(_:)))
+                    timeLineView.isUserInteractionEnabled = true
                     timeLineView.addGestureRecognizer(timeLineTap)
                     timeLineView.goalIndex = loopProducingTimeLineView
                     timeLineView.goal = goalRetrieved
                     heightOfContent+=(gapBetweenGoalBars + timeLineHeight)
                     
-                    loopProducingTimeLineView++
+                    loopProducingTimeLineView+=1
                 }
                 
                 
@@ -534,7 +548,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         let subViews = scrollView.subviews
         for subview in subViews
         {
-            if subview.isMember(of: TimeLineView)
+            if subview.isMember(of: TimeLineView.self)
             {
                 subview.removeFromSuperview()
             }
@@ -544,6 +558,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     
      @IBAction func changeTimeUnitOfTimeLine(_ segmentedControl:UISegmentedControl)
     {
+        print("selected: \(segmentedControl.selectedSegmentIndex)")
         switch segmentedControl.selectedSegmentIndex
         {
         case 0: // month
@@ -588,7 +603,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         let subViews = scrollView.subviews
         for subview in subViews
         {
-            if subview.isMember(of: TimeLineViewGoalLabel)
+            if subview.isMember(of: TimeLineViewGoalLabel.self)
             {
                 subview.frame.origin.x = middleOfScreen.x - subview.frame.width/2
             }
@@ -641,10 +656,12 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
             let monthsPassed = floor(scrollView.contentOffset.x/dateLabelLength)
             var comps = DateComponents()
             comps.month = Int(monthsPassed)
-            let dateToMostLeft = ((calendar as NSCalendar).date(byAdding: comps, to: today, options: []))!
+            //OLD CODE let dateToMostLeft = ((calendar as Calendar).date(byAdding: comps, to: today, options: []))!
+            let dateToMostLeft = (calendar as Calendar).date(byAdding: comps, to: today)!
             //updateLabelsPositionsWhenScrolling(scrollView.contentOffset, timelinexPosition: 0)
-            let comp2 = (calendar as NSCalendar).components(.year, from: dateToMostLeft)
-            let year = comp2.year
+            //OLD CODE let comp2 = (calendar as Calendar).date(.year, from: dateToMostLeft)
+            let comp2 = (calendar as Calendar).dateComponents([.year], from: dateToMostLeft)
+            let year = comp2.year!
             self.navigationItem.leftBarButtonItem?.title = String(describing: year)
             
         case 1: // calender quarter
@@ -723,7 +740,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if ((segue.identifier == "showCreateEditView" && ((sender as AnyObject).isMember(of: UIBarButtonItem)) == false)) // This was invoked by tapping a TLView not the plus sign
+        if ((segue.identifier == "showCreateEditView" && ((sender as AnyObject).isMember(of: UIBarButtonItem.self)) == false)) // This was invoked by tapping a TLView not the plus sign
         {
             let goal : Goal = sender as! Goal
             //var vc = CreateEditGoals()
@@ -735,11 +752,17 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         }
         else
         {
-            if (segue.identifier == "showCreateEditView" && (sender as AnyObject).isMember(of: UIBarButtonItem) == true && timeLinesArray.count > 0)
+            if (segue.identifier == "showCreateEditView" && (sender as AnyObject).isMember(of: UIBarButtonItem.self) == true && timeLinesArray.count > 0)
             {
                 //This user is not new to this app as they have created TLViews before
                 let vc = segue.destination as! CreateEditGoals
                 vc.userIsNew = false
+            }
+            
+            
+            if segue.identifier == "list" {
+                let vc = segue.destination as! ListOfGoalsViewController
+                vc.currentYear = currentYear
             }
         }
         
@@ -781,7 +804,9 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         
         return formattedDateString.uppercased()
     }
-
+    
+    
+    
     
     
     

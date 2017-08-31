@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DBR-p9-Tel">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DBR-p9-Tel">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -21,14 +20,14 @@
                         <viewControllerLayoutGuide type="bottom" id="ooL-aG-kPE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ddv-rL-Ov3" customClass="bkgrd" customModule="YearsFromNow" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as7-m2-AlS">
-                                <rect key="frame" x="16" y="0.0" width="568" height="536"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as7-m2-AlS">
+                                <rect key="frame" x="12" y="0.0" width="351" height="603"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7tZ-IS-UMh" customClass="Tooltip" customModule="YearsFromNow" customModuleProvider="target">
-                                        <rect key="frame" x="160" y="204" width="240" height="128"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tZ-IS-UMh" customClass="Tooltip" customModule="YearsFromNow" customModuleProvider="target">
+                                        <rect key="frame" x="52" y="238" width="240" height="128"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPO-g8-EWC">
                                                 <rect key="frame" x="8" y="30" width="224" height="67"/>
@@ -65,12 +64,55 @@
                                     </mask>
                                 </variation>
                             </scrollView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6yu-mW-E3T">
+                                <rect key="frame" x="95" y="557" width="185" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="dH4-dv-BZz"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Month"/>
+                                    <segment title="Quarter"/>
+                                    <segment title="Year"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dH4-dv-BZz"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="changeTimeUnitOfTimeLine:" destination="fRB-bt-iBo" eventType="valueChanged" id="btQ-04-Zkj"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKz-zM-miM">
+                                <rect key="frame" x="315" y="551" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="dM1-2L-h4e"/>
+                                    <constraint firstAttribute="height" constant="40" id="kAd-U8-gFh"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rt5-7E-pcl">
+                                <rect key="frame" x="20" y="551" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="foE-rj-D9b"/>
+                                    <constraint firstAttribute="width" constant="40" id="nD0-pZ-uAn"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="GKJ-wU-ZJD" kind="show" identifier="list" id="KFD-UY-0nM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="as7-m2-AlS" firstAttribute="trailing" secondItem="ddv-rL-Ov3" secondAttribute="trailingMargin" constant="4" id="2f9-ES-anQ"/>
+                            <constraint firstItem="ooL-aG-kPE" firstAttribute="top" secondItem="sKz-zM-miM" secondAttribute="bottom" constant="12" id="655-LA-5Ua"/>
                             <constraint firstItem="as7-m2-AlS" firstAttribute="trailing" secondItem="ddv-rL-Ov3" secondAttribute="trailingMargin" id="6g8-hG-Uce"/>
                             <constraint firstItem="as7-m2-AlS" firstAttribute="top" secondItem="BwE-c5-Lag" secondAttribute="bottom" id="KU1-bY-tVc"/>
+                            <constraint firstItem="6yu-mW-E3T" firstAttribute="centerX" secondItem="as7-m2-AlS" secondAttribute="centerX" id="L12-om-ui4"/>
+                            <constraint firstItem="6yu-mW-E3T" firstAttribute="centerY" secondItem="Rt5-7E-pcl" secondAttribute="centerY" id="LPX-Wp-bd3"/>
+                            <constraint firstItem="sKz-zM-miM" firstAttribute="leading" secondItem="6yu-mW-E3T" secondAttribute="trailing" constant="35" id="Shh-Vo-xBQ"/>
+                            <constraint firstItem="ooL-aG-kPE" firstAttribute="top" secondItem="Rt5-7E-pcl" secondAttribute="bottom" constant="12" id="YlY-W5-xpF"/>
+                            <constraint firstItem="6yu-mW-E3T" firstAttribute="leading" secondItem="Rt5-7E-pcl" secondAttribute="trailing" constant="35" id="iOM-YL-vry"/>
                             <constraint firstItem="as7-m2-AlS" firstAttribute="leading" secondItem="ddv-rL-Ov3" secondAttribute="leadingMargin" id="mwt-Sq-Qb5"/>
                             <constraint firstItem="as7-m2-AlS" firstAttribute="leading" secondItem="ddv-rL-Ov3" secondAttribute="leadingMargin" constant="-4" id="rNA-1y-7dU"/>
                             <constraint firstItem="as7-m2-AlS" firstAttribute="bottom" secondItem="ooL-aG-kPE" secondAttribute="top" id="rTM-Hu-BsX"/>
@@ -89,27 +131,6 @@
                                 <action selector="scrollToCurrentMonth" destination="fRB-bt-iBo" id="M6E-L2-2Hc"/>
                             </connections>
                         </barButtonItem>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="vYY-PJ-TaH">
-                            <rect key="frame" x="207.5" y="7" width="185" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="28" id="JsK-bB-TYX"/>
-                            </constraints>
-                            <segments>
-                                <segment title="Month"/>
-                                <segment title="Quarter"/>
-                                <segment title="Year"/>
-                            </segments>
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="JsK-bB-TYX"/>
-                                </mask>
-                            </variation>
-                            <connections>
-                                <action selector="changeTimeUnitOfTimeLine:" destination="fRB-bt-iBo" eventType="valueChanged" id="890-Kw-g0h"/>
-                            </connections>
-                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="vTh-c3-Wfd">
                             <connections>
                                 <segue destination="exy-Kz-37d" kind="presentation" identifier="showCreateEditView" id="rgM-Z5-Up1"/>
@@ -119,15 +140,108 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="bkgrd" destination="ddv-rL-Ov3" id="0qn-MC-WdP"/>
+                        <outlet property="calendarButton" destination="Rt5-7E-pcl" id="KUT-X1-ceK"/>
                         <outlet property="createNewGoalButtonItem" destination="vTh-c3-Wfd" id="akx-h8-Jvd"/>
-                        <outlet property="dateSwitcher" destination="vYY-PJ-TaH" id="scM-XX-iUv"/>
+                        <outlet property="dateSwitcher" destination="6yu-mW-E3T" id="paZ-eb-aWh"/>
+                        <outlet property="newGoalButton" destination="sKz-zM-miM" id="uUK-q5-A7a"/>
                         <outlet property="scrollView" destination="as7-m2-AlS" id="MSF-bM-UgZ"/>
                         <outlet property="toolTip" destination="7tZ-IS-UMh" id="1jd-Hr-QL0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNJ-gw-otK" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1162" y="372"/>
+            <point key="canvasLocation" x="1454" y="372"/>
+        </scene>
+        <!--List Of Goals View Controller-->
+        <scene sceneID="LUr-b8-tff">
+            <objects>
+                <viewController id="GKJ-wU-ZJD" customClass="ListOfGoalsViewController" customModule="YearsFromNow" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b1q-m3-LSu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qje-Lx-N7s"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8La-xq-14a" customClass="bkgrd" customModule="YearsFromNow" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="IQ8-DN-OXH">
+                                <rect key="frame" x="16" y="0.0" width="343" height="533"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="533" id="1XQ-S9-qKJ"/>
+                                </constraints>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="yfn" textLabel="EIj-oA-tAP" style="IBUITableViewCellStyleDefault" id="wR3-8M-gkn">
+                                        <rect key="frame" x="0.0" y="55.5" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wR3-8M-gkn" id="nDF-BC-bxb">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EIj-oA-tAP">
+                                                    <rect key="frame" x="15" y="0.0" width="313" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GKJ-wU-ZJD" id="bhG-5O-0rm"/>
+                                    <outlet property="delegate" destination="GKJ-wU-ZJD" id="dY2-1Z-Y1Q"/>
+                                </connections>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="pd6-JQ-3jb">
+                                <rect key="frame" x="101" y="563" width="185" height="29"/>
+                                <segments>
+                                    <segment title="Month"/>
+                                    <segment title="Quarter"/>
+                                    <segment title="Year"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8R-Nl-pip">
+                                <rect key="frame" x="26" y="551" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2rx-5O-Xwo"/>
+                                    <constraint firstAttribute="width" constant="40" id="NNw-zY-2tu"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-UD-0vR">
+                                <rect key="frame" x="321" y="551" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Fgq-cl-ixg"/>
+                                    <constraint firstAttribute="height" constant="40" id="ymE-a6-tmN"/>
+                                </constraints>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pd6-JQ-3jb" firstAttribute="leading" secondItem="b8R-Nl-pip" secondAttribute="trailing" constant="35" id="687-7p-JOr"/>
+                            <constraint firstAttribute="bottom" secondItem="b8R-Nl-pip" secondAttribute="bottom" constant="12" id="BJC-tf-v81"/>
+                            <constraint firstAttribute="trailing" secondItem="pd6-JQ-3jb" secondAttribute="trailingMargin" constant="97" id="Mah-1v-vJB"/>
+                            <constraint firstItem="Qje-Lx-N7s" firstAttribute="top" secondItem="tHP-UD-0vR" secondAttribute="bottom" constant="12" id="QLy-PG-JAE"/>
+                            <constraint firstItem="IQ8-DN-OXH" firstAttribute="trailing" secondItem="8La-xq-14a" secondAttribute="trailingMargin" id="WnX-Bz-Ttv"/>
+                            <constraint firstItem="IQ8-DN-OXH" firstAttribute="leading" secondItem="8La-xq-14a" secondAttribute="leadingMargin" id="alT-jG-LAb"/>
+                            <constraint firstItem="tHP-UD-0vR" firstAttribute="leading" secondItem="pd6-JQ-3jb" secondAttribute="trailing" constant="35" id="b6h-3u-Syn"/>
+                            <constraint firstItem="Qje-Lx-N7s" firstAttribute="top" secondItem="pd6-JQ-3jb" secondAttribute="bottom" constant="12" id="udr-vZ-sCK"/>
+                            <constraint firstItem="IQ8-DN-OXH" firstAttribute="top" secondItem="b1q-m3-LSu" secondAttribute="bottom" id="wxD-04-Q8h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dateSwitcher" destination="pd6-JQ-3jb" id="5C6-pn-ApS"/>
+                        <outlet property="goalsTable" destination="IQ8-DN-OXH" id="ZAU-V0-R8R"/>
+                        <outlet property="graphButton" destination="b8R-Nl-pip" id="qKa-N6-Iw7"/>
+                        <outlet property="newGoalButton" destination="tHP-UD-0vR" id="lEV-9e-lSq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AvY-Jf-M0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1453.5999999999999" y="1100.5997001499252"/>
         </scene>
         <!--Title-->
         <scene sceneID="wAz-Z2-j8T">
@@ -570,16 +684,17 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1855" y="372"/>
+            <point key="canvasLocation" x="2230" y="372"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jpj-1a-nuq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DBR-p9-Tel" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="nuC-aC-I08">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -604,7 +719,7 @@
                         <viewControllerLayoutGuide type="bottom" id="5Oy-7G-iSV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bGV-k8-ouD">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>

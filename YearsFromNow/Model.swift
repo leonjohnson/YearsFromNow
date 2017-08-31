@@ -6,6 +6,8 @@ class Goal:Object
     dynamic var title = ""
     dynamic var notes = ""
     dynamic var start_date = Date()
+    dynamic var start_after_goal = ""
+    dynamic var start_days_after = ""
     dynamic var end_date = Date()
     
     

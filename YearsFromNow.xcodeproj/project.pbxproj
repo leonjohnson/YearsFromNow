@@ -10,6 +10,7 @@
 		3740347999B9EFF75315D7F0 /* Pods_YearsFromNow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */; };
 		F7017F411BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */; };
 		F7017F461BAC9EF20094BAD1 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F451BAC9EF20094BAD1 /* Tooltip.swift */; };
+		F72F1FF91F460B2800B23531 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78EBB501F46009F00902CAC /* RealmSwift.framework */; };
 		F75637711BB4C9C300626B9E /* TimeLineScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75637701BB4C9C300626B9E /* TimeLineScrollView.swift */; };
 		F75637751BB9BDC400626B9E /* OnBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75637741BB9BDC400626B9E /* OnBoard.swift */; };
 		F75BEC6A1BD44683008EE1F2 /* CreateEditScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75BEC691BD44683008EE1F2 /* CreateEditScrollView.swift */; };
@@ -25,24 +26,12 @@
 		F76172DE1BA6DDE70097F912 /* PickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76172DD1BA6DDE70097F912 /* PickerDelegate.swift */; };
 		F775C7841BBABD9E005614E8 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F775C7821BBABD9E005614E8 /* Fabric.framework */; };
 		F775C7851BBABD9E005614E8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F775C7831BBABD9E005614E8 /* Crashlytics.framework */; };
+		F7A94CFC1F4C697E00D68A29 /* ListOfGoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A94CFB1F4C697E00D68A29 /* ListOfGoalsViewController.swift */; };
 		F7E2B7781BB21F4900DBB91B /* TimeLineViewGoalLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E2B7771BB21F4900DBB91B /* TimeLineViewGoalLabel.swift */; };
 		F7E5A9331BA9D246003162EF /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E5A9321BA9D246003162EF /* PageContentViewController.swift */; };
 		F7F486B01BA721BC00C2615B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F486AF1BA721BC00C2615B /* Model.swift */; };
 		F7F486B21BA78EAA00C2615B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F486B11BA78EAA00C2615B /* Extensions.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F7FC84851BDED5AE0093E525 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2CC8ADD3B45560972829FC78 /* Pods-YearsFromNow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearsFromNow.release.xcconfig"; path = "Pods/Target Support Files/Pods-YearsFromNow/Pods-YearsFromNow.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +39,8 @@
 		D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YearsFromNow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditScrollViewDelegate.swift; sourceTree = "<group>"; };
 		F7017F451BAC9EF20094BAD1 /* Tooltip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
+		F72F1FFD1F460CA200B23531 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		F72F1FFE1F460CA300B23531 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		F75637701BB4C9C300626B9E /* TimeLineScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineScrollView.swift; sourceTree = "<group>"; };
 		F75637741BB9BDC400626B9E /* OnBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoard.swift; sourceTree = "<group>"; };
 		F75BEC691BD44683008EE1F2 /* CreateEditScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditScrollView.swift; sourceTree = "<group>"; };
@@ -67,6 +58,9 @@
 		F76172DD1BA6DDE70097F912 /* PickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerDelegate.swift; sourceTree = "<group>"; };
 		F775C7821BBABD9E005614E8 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		F775C7831BBABD9E005614E8 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		F78EBB501F46009F00902CAC /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/YearsFromNow-dwjrlatljrwuwsbrkdtbvqiwswwj/Build/Products/Debug-iphonesimulator/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
+		F78EBB521F4600DF00902CAC /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
+		F7A94CFB1F4C697E00D68A29 /* ListOfGoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfGoalsViewController.swift; sourceTree = "<group>"; };
 		F7E2B7771BB21F4900DBB91B /* TimeLineViewGoalLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewGoalLabel.swift; sourceTree = "<group>"; };
 		F7E5A9321BA9D246003162EF /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		F7F486AF1BA721BC00C2615B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -78,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F72F1FF91F460B2800B23531 /* RealmSwift.framework in Frameworks */,
 				F775C7851BBABD9E005614E8 /* Crashlytics.framework in Frameworks */,
 				F775C7841BBABD9E005614E8 /* Fabric.framework in Frameworks */,
 				3740347999B9EFF75315D7F0 /* Pods_YearsFromNow.framework in Frameworks */,
@@ -99,6 +94,8 @@
 		D5919209F6C88FFF8BBCEC62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F78EBB521F4600DF00902CAC /* Realm.framework */,
+				F78EBB501F46009F00902CAC /* RealmSwift.framework */,
 				D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */,
 			);
 			name = Frameworks;
@@ -107,6 +104,8 @@
 		F76172A31BA6D92F0097F912 = {
 			isa = PBXGroup;
 			children = (
+				F72F1FFD1F460CA200B23531 /* Realm.framework */,
+				F72F1FFE1F460CA300B23531 /* RealmSwift.framework */,
 				F775C7821BBABD9E005614E8 /* Fabric.framework */,
 				F775C7831BBABD9E005614E8 /* Crashlytics.framework */,
 				F76172AE1BA6D92F0097F912 /* YearsFromNow */,
@@ -176,6 +175,7 @@
 				F7E5A9321BA9D246003162EF /* PageContentViewController.swift */,
 				F75637741BB9BDC400626B9E /* OnBoard.swift */,
 				F76172B31BA6D92F0097F912 /* DisplayGoals.swift */,
+				F7A94CFB1F4C697E00D68A29 /* ListOfGoalsViewController.swift */,
 				F76172D11BA6DCEE0097F912 /* CreateEditGoals.swift */,
 			);
 			name = Controller;
@@ -203,7 +203,6 @@
 				F76172A91BA6D92F0097F912 /* Frameworks */,
 				F76172AA1BA6D92F0097F912 /* Resources */,
 				F775C7811BBABD5D005614E8 /* ShellScript */,
-				F7FC84851BDED5AE0093E525 /* Embed Frameworks */,
 				A992C77F0F4D00251886AA4C /* [CP] Embed Pods Frameworks */,
 				8AE9B87AB509E62556728769 /* [CP] Copy Pods Resources */,
 			);
@@ -224,13 +223,14 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Leon Johnson";
 				TargetAttributes = {
 					F76172AB1BA6D92F0097F912 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 644582FWFB;
 						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -277,13 +277,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YearsFromNow-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8AE9B87AB509E62556728769 /* [CP] Copy Pods Resources */ = {
@@ -307,9 +310,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YearsFromNow/Pods-YearsFromNow-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -342,6 +350,7 @@
 				F76172DA1BA6DDBA0097F912 /* bkgrd.swift in Sources */,
 				F76172B21BA6D92F0097F912 /* AppDelegate.swift in Sources */,
 				F75637711BB4C9C300626B9E /* TimeLineScrollView.swift in Sources */,
+				F7A94CFC1F4C697E00D68A29 /* ListOfGoalsViewController.swift in Sources */,
 				F75637751BB9BDC400626B9E /* OnBoard.swift in Sources */,
 				F7017F411BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift in Sources */,
 				F76172D21BA6DCEE0097F912 /* CreateEditGoals.swift in Sources */,
@@ -385,14 +394,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -417,7 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -433,14 +448,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -458,7 +479,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -472,17 +493,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 644582FWFB;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
 				);
 				INFOPLIST_FILE = YearsFromNow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "977437a7-19a4-455d-b8fd-f324c9058b9a";
-				PROVISIONING_PROFILE_SPECIFIER = mp;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -493,18 +517,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Leon JOHNSON (JKSXM5Z568)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Leon JOHNSON (JKSXM5Z568)";
-				DEVELOPMENT_TEAM = 644582FWFB;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
 				);
 				INFOPLIST_FILE = YearsFromNow/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "977437a7-19a4-455d-b8fd-f324c9058b9a";
-				PROVISIONING_PROFILE_SPECIFIER = mp;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};

@@ -45,8 +45,9 @@ let systemFontBold13 = UIFont.systemFont(ofSize: 13, weight: UIFontWeightBold)//
 let labelFont = UIFont.systemFont(ofSize: 16, weight: UIFontWeightBold)//UIFont(name: "HelveticaNeue-Bold", size: 16)!
 let logoFont = UIFont.systemFont(ofSize: 12, weight: UIFontWeightBold)//UIFont(name: "Helvetica-Bold", size: 12.0)!
 let lightFont = UIFont.systemFont(ofSize: 13, weight: UIFontWeightThin)//UIFont(name: "Helvetica-Light", size: 12.0)!
-let dateFont = UIFont.systemFont(ofSize: 16, weight: UIFontWeightThin)//UIFont(name: "Helvetica-Light", size: 16.0)!
-let yearFont = UIFont.systemFont(ofSize: 18, weight: UIFontWeightThin)//UIFont(name: "Helvetica-Light", size: 18.0)!
+let mediumFont = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
+let dateFont = UIFont.systemFont(ofSize: 13, weight: UIFontWeightThin)//UIFont(name: "Helvetica-Light", size: 16.0)!
+let yearFont = UIFont.systemFont(ofSize: 16.25, weight: UIFontWeightMedium)//UIFont(name: "Helvetica-Light", size: 18.0)!
 let timeLineLabelFont = UIFont.systemFont(ofSize: 12, weight: UIFontWeightBold)//UIFont(name: "Helvetica-Bold", size: 12.0)!
 
 
