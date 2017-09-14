@@ -1,8 +1,9 @@
-platform :ios, '9.0'
+platform :ios, '11.0'
 use_frameworks!
 
 target 'YearsFromNow' do
     pod ‘RealmSwift’
+    pod 'UnderKeyboard', git: 'https://github.com/marketplacer/UnderKeyboard.git', branch: 'swift-4.0'
 end
 
 post_install do |installer|

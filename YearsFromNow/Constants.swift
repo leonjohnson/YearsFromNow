@@ -12,7 +12,7 @@ let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OC
 let calendar = Calendar.current
 let today = Date()
 
-let timeLineHeight = 40
+let timeLineHeight = 46
 
 // Theme
 enum APP_BACKGROUND_COLOURS: String {
@@ -46,6 +46,7 @@ let labelFont = UIFont.systemFont(ofSize: 16, weight: UIFontWeightBold)//UIFont(
 let logoFont = UIFont.systemFont(ofSize: 12, weight: UIFontWeightBold)//UIFont(name: "Helvetica-Bold", size: 12.0)!
 let lightFont = UIFont.systemFont(ofSize: 13, weight: UIFontWeightThin)//UIFont(name: "Helvetica-Light", size: 12.0)!
 let mediumFont = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
+let bodyFont = UIFont.systemFont(ofSize: 16, weight: UIFontWeightRegular)
 let dateFont = UIFont.systemFont(ofSize: 13, weight: UIFontWeightThin)//UIFont(name: "Helvetica-Light", size: 16.0)!
 let yearFont = UIFont.systemFont(ofSize: 16.25, weight: UIFontWeightMedium)//UIFont(name: "Helvetica-Light", size: 18.0)!
 let timeLineLabelFont = UIFont.systemFont(ofSize: 12, weight: UIFontWeightBold)//UIFont(name: "Helvetica-Bold", size: 12.0)!

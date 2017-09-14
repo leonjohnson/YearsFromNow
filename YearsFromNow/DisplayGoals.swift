@@ -19,7 +19,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var createNewGoalButtonItem: UIBarButtonItem!
     @IBOutlet weak var toolTip : Tooltip!
-    @IBOutlet weak var calendarButton : UIButton!
+    @IBOutlet weak var listViewButton : UIButton!
     @IBOutlet weak var newGoalButton : UIButton!
     
     let calendar = Calendar.current
@@ -67,9 +67,8 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(yearLabelAttributes, for: .normal)
         
         //Button bar
-        let calendarImage = #imageLiteral(resourceName: "calendar")
-        calendarButton.setImage(calendarImage, for: .normal)
-        calendarButton.tintColor = UIColor.white
+        listViewButton.setImage(#imageLiteral(resourceName: "list"), for: .normal)
+        listViewButton.tintColor = UIColor.white
         
         let addGoalImage = #imageLiteral(resourceName: "add")
         newGoalButton.setImage(addGoalImage, for: .normal)
@@ -462,8 +461,8 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
                         yCoordiante+=100
                     }
                     let timeLineView = TimeLineView(frame: CGRect(x:0, y: Int(yCoordiante), width: Int(w), height:timeLineHeight))
-                    timeLineView.backgroundColor = UIColor.black
-                    timeLineView.alpha = 0.5
+                    timeLineView.backgroundColor = UIColor.clear
+                    //timeLineView.alpha = 0.5
                     timeLineView.tag = loopProducingTimeLineView
                     
                     scrollView.addSubview(timeLineView)

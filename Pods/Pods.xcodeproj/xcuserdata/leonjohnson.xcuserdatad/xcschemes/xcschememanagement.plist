@@ -19,24 +19,13 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UnderKeyboard.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>039CC67D45445DD581719500CE5656C1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>362EB2B46E33B8F7867913958A617959</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CDA1C099DE3E3B4728EEE0479062A70F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

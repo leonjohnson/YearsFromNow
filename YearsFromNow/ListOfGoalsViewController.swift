@@ -1,12 +1,13 @@
 import UIKit
 import RealmSwift
 
-class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
    
     @IBOutlet var goalsTable : UITableView!
     @IBOutlet weak var dateSwitcher: UISegmentedControl!
-    @IBOutlet weak var graphButton : UIButton!
+    @IBOutlet weak var calendarButton : UIButton!
     @IBOutlet weak var newGoalButton : UIButton!
+    @IBOutlet weak var yearLabel : UILabel!
     var goalsByMonth : [[Goal]] = []
     var goalsByQuarter : [[Goal]] = []
     var goalsByYear : [[Goal]] = []
@@ -23,8 +24,8 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationController?.view.backgroundColor = UIColor.clear
         
         
-        // Segmented control
-        let attributes = [NSFontAttributeName:lightFont, NSForegroundColorAttributeName:UIColor.black]
+        // Date Switcher
+        let attributes = [NSFontAttributeName:mediumFont, NSForegroundColorAttributeName:UIColor.white]
         let newAttributes = [NSFontAttributeName:systemFontBold13, NSForegroundColorAttributeName:UIColor.gray]
         dateSwitcher.setTitleTextAttributes(attributes, for: .normal)
         dateSwitcher.setTitleTextAttributes(newAttributes, for: .selected)
@@ -35,8 +36,8 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
         
         //Button bar
         let calendarImage = #imageLiteral(resourceName: "calendar")
-        graphButton.setImage(calendarImage, for: .normal)
-        graphButton.tintColor = UIColor.white
+        calendarButton.setImage(calendarImage, for: .normal)
+        calendarButton.tintColor = UIColor.white
         
         let addGoalImage = #imageLiteral(resourceName: "add")
         newGoalButton.setImage(addGoalImage, for: .normal)
@@ -46,7 +47,7 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
         fetchGoals()
         goalsTable.reloadData()
         dateSwitcher.addTarget(self, action: #selector(reloadTableView(sender:)), for: .valueChanged)
-        graphButton.addTarget(self, action: #selector(backToGraphView), for: UIControlEvents.touchUpInside)
+        calendarButton.addTarget(self, action: #selector(backToGraphView), for: UIControlEvents.touchUpInside)
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +65,7 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
         case 1,2,3: newMonth = 1
         case 4,5,6: newMonth = 4
         case 7,8,9: newMonth = 7
-        case 10,11,12: newMonth = 10
+        case 10,11,12, 13: newMonth = 10 //Hebrew and Coptic calendars have 13 months
         default: newMonth = 1
         }
         components.month = newMonth
@@ -103,7 +104,8 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
             let numberGroups = Set(numbers).map{ value in return numbers.filter{$0==value} }
             */
             
-            for month in 0...119 {
+            let numberOfMonthsInCalendar = ((Calendar.current.maximumRange(of: .month)?.count)! * 10) - 1
+            for month in 0...numberOfMonthsInCalendar {
                 let displayDate = Calendar.current.date(byAdding: .month, value: month, to: startOfThisMonth!)
                 var goalsInCurrentMonth : [Goal] = []
                 for goal in goals {
@@ -114,15 +116,12 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
                 }
                 if goalsInCurrentMonth.count > 0 {
                     goalsByMonth.append(goalsInCurrentMonth)
-                    for each in goalsByMonth {
-                        print("each", each)
-                    }
                 }
                 
 
             }
-            
-            for quarter in 0...29 {
+            let numberOfQuartersInCalendar = ((Calendar.current.maximumRange(of: .quarter)?.count)! * 10) - 1
+            for quarter in 0...numberOfQuartersInCalendar {
                 let displayQuarter : Date = Calendar.current.date(byAdding: .month, value: (quarter * 3), to: Date())! // quarter * 3 for a qtr
                 
                 let quarter_start_date = startOfQuarter(startDate: displayQuarter)
@@ -232,15 +231,9 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
         default:
             return ""
         }
-        
-
     }
     
-    /*
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //
-    }
-     */
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("calling numberOfRowsInSection")
@@ -265,25 +258,72 @@ class ListOfGoalsViewController: UIViewController, UITableViewDataSource, UITabl
         let section = indexPath.section
         let row = indexPath.row
         let labelText:String
+        let typeOfString : String
+        let currentYear : NSAttributedString
+        
+        let firstVisibleRow = tableView.indexPathsForVisibleRows?.first?.row
+        let firstVisibleSection = tableView.indexPathsForVisibleRows?.first?.section        
         
         switch dateSwitcher.selectedSegmentIndex {
         case 0:
             labelText = goalsByMonth[section][row].notes
+            typeOfString = "the month"
+            
+            //For the top visible row
+            let goal = goalsByMonth[firstVisibleSection!][firstVisibleRow!]
+            let start_date = goal.start_date
+            let dateToDisplay = Calendar.current.date(byAdding: .month, value: firstVisibleSection!, to: start_date)
+            let year = Calendar.current.component(.year, from: dateToDisplay!)
+            let localString = NSLocalizedString(String(describing: year), comment: "The year")
+            let yearLabelAttributes = [NSFontAttributeName:yearFont, NSForegroundColorAttributeName:UIColor.white]
+            currentYear = NSAttributedString(string: localString, attributes:yearLabelAttributes)
+            yearLabel.attributedText = currentYear
         case 1:
             labelText = goalsByQuarter[section][row].notes
+            typeOfString = "the quarter"
         case 2:
             labelText = goalsByYear[section][row].notes
+            typeOfString = "the year"
         default:
             labelText = "Deafult fallthrough"
+            typeOfString = "the month"
         }
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "yfn", for: indexPath)
         cell.backgroundColor = UIColor.clear
-        cell.textLabel?.text = labelText
+        let localisedString = NSLocalizedString(labelText, comment: typeOfString)
+        //cell.textLabel?.text = NSLocalizedString(labelText, comment: "the label string")
+        let attributes = [NSFontAttributeName:bodyFont, NSForegroundColorAttributeName:UIColor.white]
+        cell.textLabel?.attributedText = NSAttributedString(string: localisedString, attributes: attributes)
+        
+        
         return cell
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let tableView = goalsTable
+        let currentYear : NSAttributedString
+        let firstVisibleSection = tableView?.indexPathsForVisibleRows?.first?.section
+        
+        switch dateSwitcher.selectedSegmentIndex {
+        case 0:
+            //For the top visible row
+            let dateToDisplay = Calendar.current.date(byAdding: .month, value: firstVisibleSection!, to: Date())
+            let year = Calendar.current.component(.year, from: dateToDisplay!)
+            let localString = NSLocalizedString(String(describing: year), comment: "The year")
+            let yearLabelAttributes = [NSFontAttributeName:yearFont, NSForegroundColorAttributeName:UIColor.white]
+            currentYear = NSAttributedString(string: localString, attributes: yearLabelAttributes)
+            yearLabel.attributedText = currentYear
+            print("year as %@", yearLabel.text!)
+        case 1:
+            break
+        case 2:
+            break
+        default:
+            break
+        }
+    }
     
     func reloadTableView(sender:UISegmentedControl){
         print("About to reload goals table")

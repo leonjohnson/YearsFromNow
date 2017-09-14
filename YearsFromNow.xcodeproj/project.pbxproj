@@ -10,7 +10,9 @@
 		3740347999B9EFF75315D7F0 /* Pods_YearsFromNow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */; };
 		F7017F411BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */; };
 		F7017F461BAC9EF20094BAD1 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F451BAC9EF20094BAD1 /* Tooltip.swift */; };
+		F70CA4121F69AC230012A434 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70CA4111F69AC230012A434 /* ViewController.swift */; };
 		F72F1FF91F460B2800B23531 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78EBB501F46009F00902CAC /* RealmSwift.framework */; };
+		F731E1121F680BBF00EC4C5E /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F731E1111F680BBF00EC4C5E /* Categories.swift */; };
 		F75637711BB4C9C300626B9E /* TimeLineScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75637701BB4C9C300626B9E /* TimeLineScrollView.swift */; };
 		F75637751BB9BDC400626B9E /* OnBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75637741BB9BDC400626B9E /* OnBoard.swift */; };
 		F75BEC6A1BD44683008EE1F2 /* CreateEditScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75BEC691BD44683008EE1F2 /* CreateEditScrollView.swift */; };
@@ -29,7 +31,7 @@
 		F7A94CFC1F4C697E00D68A29 /* ListOfGoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A94CFB1F4C697E00D68A29 /* ListOfGoalsViewController.swift */; };
 		F7E2B7781BB21F4900DBB91B /* TimeLineViewGoalLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E2B7771BB21F4900DBB91B /* TimeLineViewGoalLabel.swift */; };
 		F7E5A9331BA9D246003162EF /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E5A9321BA9D246003162EF /* PageContentViewController.swift */; };
-		F7F486B01BA721BC00C2615B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F486AF1BA721BC00C2615B /* Model.swift */; };
+		F7F486B01BA721BC00C2615B /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F486AF1BA721BC00C2615B /* Goal.swift */; };
 		F7F486B21BA78EAA00C2615B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F486B11BA78EAA00C2615B /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +41,10 @@
 		D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YearsFromNow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditScrollViewDelegate.swift; sourceTree = "<group>"; };
 		F7017F451BAC9EF20094BAD1 /* Tooltip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
+		F70CA4111F69AC230012A434 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F72F1FFD1F460CA200B23531 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		F72F1FFE1F460CA300B23531 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		F731E1111F680BBF00EC4C5E /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		F75637701BB4C9C300626B9E /* TimeLineScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineScrollView.swift; sourceTree = "<group>"; };
 		F75637741BB9BDC400626B9E /* OnBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoard.swift; sourceTree = "<group>"; };
 		F75BEC691BD44683008EE1F2 /* CreateEditScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditScrollView.swift; sourceTree = "<group>"; };
@@ -63,7 +67,7 @@
 		F7A94CFB1F4C697E00D68A29 /* ListOfGoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfGoalsViewController.swift; sourceTree = "<group>"; };
 		F7E2B7771BB21F4900DBB91B /* TimeLineViewGoalLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewGoalLabel.swift; sourceTree = "<group>"; };
 		F7E5A9321BA9D246003162EF /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
-		F7F486AF1BA721BC00C2615B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F7F486AF1BA721BC00C2615B /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		F7F486B11BA78EAA00C2615B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,7 +151,8 @@
 		F76172D31BA6DD160097F912 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F7F486AF1BA721BC00C2615B /* Model.swift */,
+				F7F486AF1BA721BC00C2615B /* Goal.swift */,
+				F731E1111F680BBF00EC4C5E /* Categories.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				F76172B31BA6D92F0097F912 /* DisplayGoals.swift */,
 				F7A94CFB1F4C697E00D68A29 /* ListOfGoalsViewController.swift */,
 				F76172D11BA6DCEE0097F912 /* CreateEditGoals.swift */,
+				F70CA4111F69AC230012A434 /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -313,11 +319,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-YearsFromNow/Pods-YearsFromNow-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/UnderKeyboard/UnderKeyboard.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnderKeyboard.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -344,11 +352,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7F486B01BA721BC00C2615B /* Model.swift in Sources */,
+				F7F486B01BA721BC00C2615B /* Goal.swift in Sources */,
+				F70CA4121F69AC230012A434 /* ViewController.swift in Sources */,
 				F7E2B7781BB21F4900DBB91B /* TimeLineViewGoalLabel.swift in Sources */,
 				F76172B41BA6D92F0097F912 /* DisplayGoals.swift in Sources */,
 				F76172DA1BA6DDBA0097F912 /* bkgrd.swift in Sources */,
 				F76172B21BA6D92F0097F912 /* AppDelegate.swift in Sources */,
+				F731E1121F680BBF00EC4C5E /* Categories.swift in Sources */,
 				F75637711BB4C9C300626B9E /* TimeLineScrollView.swift in Sources */,
 				F7A94CFC1F4C697E00D68A29 /* ListOfGoalsViewController.swift in Sources */,
 				F75637751BB9BDC400626B9E /* OnBoard.swift in Sources */,
