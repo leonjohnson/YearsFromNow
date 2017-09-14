@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		3740347999B9EFF75315D7F0 /* Pods_YearsFromNow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */; };
+		4A1E714D1F6A6F28003AF82E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E714C1F6A6F28003AF82E /* TutorialViewController.swift */; };
+		4A3AE4BB1F694C04004A0B9D /* TransitionTreasury.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4BA1F694C04004A0B9D /* TransitionTreasury.swift */; };
+		4A3AE4BE1F694C52004A0B9D /* TRStatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4BC1F694C52004A0B9D /* TRStatusBarStyle.swift */; };
+		4A3AE4BF1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4BD1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift */; };
+		4A3AE4C41F694C87004A0B9D /* TRTabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4C11F694C87004A0B9D /* TRTabBarControllerDelegate.swift */; };
+		4A3AE4C51F694C87004A0B9D /* TRTabBarTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4C21F694C87004A0B9D /* TRTabBarTransitionDelegate.swift */; };
+		4A3AE4C61F694C87004A0B9D /* UITabBarController+TRTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4C31F694C87004A0B9D /* UITabBarController+TRTransition.swift */; };
+		4A3AE4CA1F694E7A004A0B9D /* TRViewControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4C81F694E7A004A0B9D /* TRViewControllerTransitionDelegate.swift */; };
+		4A3AE4CB1F694E7A004A0B9D /* UIViewController+TRPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4C91F694E7A004A0B9D /* UIViewController+TRPresent.swift */; };
+		4A3AE4CE1F69506A004A0B9D /* ScanbotTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4CD1F69506A004A0B9D /* ScanbotTransitionAnimation.swift */; };
+		4A3AE4D01F6955A9004A0B9D /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4CF1F6955A9004A0B9D /* Transition.swift */; };
+		4A3AE4D21F695715004A0B9D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4D11F695715004A0B9D /* SettingsViewController.swift */; };
 		F7017F411BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */; };
 		F7017F461BAC9EF20094BAD1 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F451BAC9EF20094BAD1 /* Tooltip.swift */; };
 		F72F1FF91F460B2800B23531 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78EBB501F46009F00902CAC /* RealmSwift.framework */; };
@@ -35,6 +47,19 @@
 
 /* Begin PBXFileReference section */
 		2CC8ADD3B45560972829FC78 /* Pods-YearsFromNow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearsFromNow.release.xcconfig"; path = "Pods/Target Support Files/Pods-YearsFromNow/Pods-YearsFromNow.release.xcconfig"; sourceTree = "<group>"; };
+		4A1E714C1F6A6F28003AF82E /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		4A3AE4BA1F694C04004A0B9D /* TransitionTreasury.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionTreasury.swift; path = Transition/TransitionTreasury.swift; sourceTree = "<group>"; };
+		4A3AE4BC1F694C52004A0B9D /* TRStatusBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRStatusBarStyle.swift; path = Transition/TRStatusBarStyle.swift; sourceTree = "<group>"; };
+		4A3AE4BD1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRViewControllerAnimatedTransitioning.swift; path = Transition/TRViewControllerAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		4A3AE4C11F694C87004A0B9D /* TRTabBarControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRTabBarControllerDelegate.swift; path = Transition/TabBarTransition/TRTabBarControllerDelegate.swift; sourceTree = "<group>"; };
+		4A3AE4C21F694C87004A0B9D /* TRTabBarTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRTabBarTransitionDelegate.swift; path = Transition/TabBarTransition/TRTabBarTransitionDelegate.swift; sourceTree = "<group>"; };
+		4A3AE4C31F694C87004A0B9D /* UITabBarController+TRTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITabBarController+TRTransition.swift"; path = "Transition/TabBarTransition/UITabBarController+TRTransition.swift"; sourceTree = "<group>"; };
+		4A3AE4C81F694E7A004A0B9D /* TRViewControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRViewControllerTransitionDelegate.swift; path = Transition/PresentTransition/TRViewControllerTransitionDelegate.swift; sourceTree = "<group>"; };
+		4A3AE4C91F694E7A004A0B9D /* UIViewController+TRPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+TRPresent.swift"; path = "Transition/PresentTransition/UIViewController+TRPresent.swift"; sourceTree = "<group>"; };
+		4A3AE4CD1F69506A004A0B9D /* ScanbotTransitionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanbotTransitionAnimation.swift; path = Transition/ScanbotTransitionAnimation.swift; sourceTree = "<group>"; };
+		4A3AE4CF1F6955A9004A0B9D /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transition.swift; path = Transition/Transition.swift; sourceTree = "<group>"; };
+		4A3AE4D11F695715004A0B9D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4A3AE4D31F695A85004A0B9D /* TransitionAnimation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TransitionAnimation.framework; path = YearsFromNow/Transition/TransitionAnimation.framework; sourceTree = "<group>"; };
 		CC8EF07C3BEAF44254BD5B38 /* Pods-YearsFromNow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearsFromNow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YearsFromNow/Pods-YearsFromNow.debug.xcconfig"; sourceTree = "<group>"; };
 		D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YearsFromNow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditScrollViewDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +107,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A3AE4AB1F69419C004A0B9D /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				4A3AE4CC1F695054004A0B9D /* animation */,
+				4A3AE4C71F694E47004A0B9D /* Present */,
+				4A3AE4C01F694C70004A0B9D /* TabBar */,
+				4A3AE4BC1F694C52004A0B9D /* TRStatusBarStyle.swift */,
+				4A3AE4BD1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift */,
+				4A3AE4BA1F694C04004A0B9D /* TransitionTreasury.swift */,
+			);
+			name = Transition;
+			sourceTree = "<group>";
+		};
+		4A3AE4C01F694C70004A0B9D /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4A3AE4C11F694C87004A0B9D /* TRTabBarControllerDelegate.swift */,
+				4A3AE4C21F694C87004A0B9D /* TRTabBarTransitionDelegate.swift */,
+				4A3AE4C31F694C87004A0B9D /* UITabBarController+TRTransition.swift */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
+		4A3AE4C71F694E47004A0B9D /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				4A3AE4C81F694E7A004A0B9D /* TRViewControllerTransitionDelegate.swift */,
+				4A3AE4C91F694E7A004A0B9D /* UIViewController+TRPresent.swift */,
+			);
+			name = Present;
+			sourceTree = "<group>";
+		};
+		4A3AE4CC1F695054004A0B9D /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				4A3AE4CF1F6955A9004A0B9D /* Transition.swift */,
+				4A3AE4CD1F69506A004A0B9D /* ScanbotTransitionAnimation.swift */,
+			);
+			name = animation;
+			sourceTree = "<group>";
+		};
 		84A41E38C167F9958686F98B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +160,7 @@
 		D5919209F6C88FFF8BBCEC62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A3AE4D31F695A85004A0B9D /* TransitionAnimation.framework */,
 				F78EBB521F4600DF00902CAC /* Realm.framework */,
 				F78EBB501F46009F00902CAC /* RealmSwift.framework */,
 				D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */,
@@ -126,6 +193,7 @@
 		F76172AE1BA6D92F0097F912 /* YearsFromNow */ = {
 			isa = PBXGroup;
 			children = (
+				4A3AE4AB1F69419C004A0B9D /* Transition */,
 				F76172DB1BA6DDCC0097F912 /* Constants.swift */,
 				F7F486B11BA78EAA00C2615B /* Extensions.swift */,
 				F76172D31BA6DD160097F912 /* Model */,
@@ -177,6 +245,8 @@
 				F76172B31BA6D92F0097F912 /* DisplayGoals.swift */,
 				F7A94CFB1F4C697E00D68A29 /* ListOfGoalsViewController.swift */,
 				F76172D11BA6DCEE0097F912 /* CreateEditGoals.swift */,
+				4A3AE4D11F695715004A0B9D /* SettingsViewController.swift */,
+				4A1E714C1F6A6F28003AF82E /* TutorialViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -228,7 +298,7 @@
 				TargetAttributes = {
 					F76172AB1BA6D92F0097F912 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 644582FWFB;
+						DevelopmentTeam = 67CQ5P77AH;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -286,7 +356,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8AE9B87AB509E62556728769 /* [CP] Copy Pods Resources */ = {
@@ -344,6 +414,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A3AE4D01F6955A9004A0B9D /* Transition.swift in Sources */,
+				4A3AE4C61F694C87004A0B9D /* UITabBarController+TRTransition.swift in Sources */,
+				4A3AE4C51F694C87004A0B9D /* TRTabBarTransitionDelegate.swift in Sources */,
+				4A3AE4CE1F69506A004A0B9D /* ScanbotTransitionAnimation.swift in Sources */,
 				F7F486B01BA721BC00C2615B /* Model.swift in Sources */,
 				F7E2B7781BB21F4900DBB91B /* TimeLineViewGoalLabel.swift in Sources */,
 				F76172B41BA6D92F0097F912 /* DisplayGoals.swift in Sources */,
@@ -351,16 +425,24 @@
 				F76172B21BA6D92F0097F912 /* AppDelegate.swift in Sources */,
 				F75637711BB4C9C300626B9E /* TimeLineScrollView.swift in Sources */,
 				F7A94CFC1F4C697E00D68A29 /* ListOfGoalsViewController.swift in Sources */,
+				4A3AE4BF1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift in Sources */,
 				F75637751BB9BDC400626B9E /* OnBoard.swift in Sources */,
 				F7017F411BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift in Sources */,
 				F76172D21BA6DCEE0097F912 /* CreateEditGoals.swift in Sources */,
 				F75BEC6A1BD44683008EE1F2 /* CreateEditScrollView.swift in Sources */,
+				4A1E714D1F6A6F28003AF82E /* TutorialViewController.swift in Sources */,
 				F7E5A9331BA9D246003162EF /* PageContentViewController.swift in Sources */,
 				F7F486B21BA78EAA00C2615B /* Extensions.swift in Sources */,
+				4A3AE4C41F694C87004A0B9D /* TRTabBarControllerDelegate.swift in Sources */,
 				F76172D91BA6DDBA0097F912 /* TimeLineView.swift in Sources */,
 				F76172DE1BA6DDE70097F912 /* PickerDelegate.swift in Sources */,
 				F76172DC1BA6DDCC0097F912 /* Constants.swift in Sources */,
+				4A3AE4BE1F694C52004A0B9D /* TRStatusBarStyle.swift in Sources */,
+				4A3AE4D21F695715004A0B9D /* SettingsViewController.swift in Sources */,
 				F7017F461BAC9EF20094BAD1 /* Tooltip.swift in Sources */,
+				4A3AE4CB1F694E7A004A0B9D /* UIViewController+TRPresent.swift in Sources */,
+				4A3AE4CA1F694E7A004A0B9D /* TRViewControllerTransitionDelegate.swift in Sources */,
+				4A3AE4BB1F694C04004A0B9D /* TransitionTreasury.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,14 +576,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 67CQ5P77AH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
+					"$(PROJECT_DIR)/YearsFromNow/Transition",
 				);
 				INFOPLIST_FILE = YearsFromNow/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -519,14 +602,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Leon JOHNSON (JKSXM5Z568)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 67CQ5P77AH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
+					"$(PROJECT_DIR)/YearsFromNow/Transition",
 				);
 				INFOPLIST_FILE = YearsFromNow/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
