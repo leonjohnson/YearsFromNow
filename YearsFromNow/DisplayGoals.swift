@@ -9,8 +9,12 @@
 import UIKit
 import RealmSwift
 
-class DisplayGoals: UIViewController, UIScrollViewDelegate
+
+class DisplayGoals: UIViewController, UIScrollViewDelegate,ModalTransitionDelegate,UIGestureRecognizerDelegate
 {
+    /// Retain transition delegate.
+    var tr_presentTransition: TRViewControllerTransitionDelegate?
+
 
     // MARK - VARIABLES
     @IBOutlet weak var bkgrd: UIView!
@@ -98,10 +102,65 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         backgroundImage.image = UIImage(named: "background.png")
         backgroundImage.contentMode = UIViewContentMode.topLeft
         self.view.insertSubview(backgroundImage, at: 0)
-        
-        
+
+        // ADD PAN GUESTURE TO SCROLL VIEW TO SHOW SETTINGS PAGE
+         addPan(scrollView);
     }
-    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        // SHOWING A TUTORIAL PAGE FOR SETTINGS 
+        // ABOUVE THE CURRENT VIEW
+        // ITS SHOWS ONLY FOR ONE TIME
+        TutorialViewController.showPage(viewController: self);
+    }
+        // DELEGATE METHOD GUSTURE
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // HANDLING MULTIPLE GUESTURE
+        return true;
+
+    }
+    func addPan(_ view : UIView){
+        // CREATING A PAN GUESTURE TO THE SCROLL VIEW
+        // TARGET SELF AND SELECTER INTERACTIVE TRANSACTION
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(DisplayGoals.interactiveTransition(_:)))
+
+        // SELF AS DELEGATE INVOKES DELEGATE METHOD FOR GUSTURE
+        pan.delegate = self
+        // ADDDING PAN GUSTURE TO VIEW
+        view.addGestureRecognizer(pan)
+    }
+
+    // INTERACTIVE OPENING OF SETTING PAGE 
+    // WE CAN CAUSTUMIZE THE RESPONSE TIME RELATION DIRECTION ETC
+    func interactiveTransition(_ sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .began:
+
+            // SET MINIMUM DOWNWORD VELOCITY
+            guard sender.velocity(in: view).y > 0 else { break }
+
+            // SET MINIMUM DOWNWORD TRANSLATION
+            guard sender.translation(in: view).y > 5 else {
+                break
+            }
+            // ENSURE TRANSLATION PREFER DOWNWOR THAN SIDES
+            guard sender.translation(in: view).y >  sender.translation(in: view).x else {
+                break
+            }
+
+            // SETTINGS PAGE VIEW CONTROLLER
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "settingsView") as! SettingsViewController
+                vc.modalDelegate = self
+            // PRESENTING PAGE WITH ANIMATION LIBRARY
+            tr_presentViewController(vc, method: Transition.scanbot(present: sender, dismisTransiltion: vc.dismissGestureRecognizer), completion: nil)
+            
+        default: break
+        }
+    }
+    override var prefersStatusBarHidden: Bool{
+        return false;
+    }
+
     override func viewWillAppear(_ animated: Bool)
     {
         navigationController?.isNavigationBarHidden = false
@@ -184,13 +243,6 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         
         
     }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        
-    }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -804,22 +856,9 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate
         
         return formattedDateString.uppercased()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
+
 
 }
+
+
 

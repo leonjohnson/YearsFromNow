@@ -182,7 +182,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     {
         let subViews = scrollView.subviews
         for subview in subViews{
-            if subview.isMember(of: Tooltip)
+            if subview.isMember(of: Tooltip.self)
             {
                 subview.removeFromSuperview()
             }
