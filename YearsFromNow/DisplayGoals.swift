@@ -140,7 +140,7 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate,ModalTransitionDelega
             guard sender.velocity(in: view).y > 0 else { break }
 
             // SET MINIMUM DOWNWORD TRANSLATION
-            guard sender.translation(in: view).y > 5 else {
+            guard sender.translation(in: view).y > 0 else {
                 break
             }
             // ENSURE TRANSLATION PREFER DOWNWOR THAN SIDES
