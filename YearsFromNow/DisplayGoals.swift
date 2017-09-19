@@ -130,6 +130,9 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate,ModalTransitionDelega
         view.addGestureRecognizer(pan)
     }
 
+    // THIS VERIABLE CHECK WHETHER ITS A VERTICAL SWIPE OR NOT
+    var verticalSwipe = false;
+
     // INTERACTIVE OPENING OF SETTING PAGE 
     // WE CAN CAUSTUMIZE THE RESPONSE TIME RELATION DIRECTION ETC
     func interactiveTransition(_ sender: UIPanGestureRecognizer) {
@@ -140,14 +143,14 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate,ModalTransitionDelega
             guard sender.velocity(in: view).y > 0 else { break }
 
             // SET MINIMUM DOWNWORD TRANSLATION
-            guard sender.translation(in: view).y >= 0 else {
+              guard sender.translation(in: view).y >= 0 else {
                 break
-            }
+              }
             // ENSURE TRANSLATION PREFER DOWNWOR THAN SIDES
             guard sender.translation(in: view).y >=  sender.translation(in: view).x else {
                 break
             }
-
+            verticalSwipe = true;
             // SETTINGS PAGE VIEW CONTROLLER
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "settingsView") as! SettingsViewController
                 vc.modalDelegate = self
@@ -158,11 +161,19 @@ class DisplayGoals: UIViewController, UIScrollViewDelegate,ModalTransitionDelega
         }
     }
     override var prefersStatusBarHidden: Bool{
+        // NOT FOR NOW
         return false;
     }
 
     override func viewWillAppear(_ animated: Bool)
     {
+        // CHECK IS SWIPE FOR SETTINGS
+        if(verticalSwipe){
+            // REVERT BACK
+            verticalSwipe = false;
+            // DONOT DO REOAD JUST RETURN
+            return;
+        }
         navigationController?.isNavigationBarHidden = false
         
         middleOfScreen = (self.view.frame.width/2, self.view.frame.height/2)
