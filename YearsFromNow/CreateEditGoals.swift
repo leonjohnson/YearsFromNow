@@ -12,6 +12,10 @@ import RealmSwift
 class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDelegate, UITextViewDelegate
 {
 
+
+    @IBOutlet weak var endDateButton: UIButton!
+
+    @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var cameraImage: UIImageView!
@@ -91,7 +95,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         //Cursor colour
         UITextView.appearance().tintColor = chosenThemeCursorColour
-        
+        return
 
         let nextResponder : UIResponder = notes
         nextResponder.becomeFirstResponder()
@@ -195,7 +199,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         if userIsNew ==  false
         {
             //The user knows how to change the end date at this point
-            toolTip.removeFromSuperview()
+            // toolTip.removeFromSuperview()
         }
         if editableGoal != nil
         {
@@ -203,17 +207,24 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             deleteGoalButton.isHidden = false
             
             //Set the end date to that in the database
-            endDate.text = nsDateToDateString(editableGoal!.end_date as Date)
-            let month_abb = endDate.text?.components(separatedBy: " ")[0]
+//            if(endDate != nil){
+//                endDate.text = nsDateToDateString(editableGoal!.end_date as Date)}
+            let datestring  = nsDateToDateString(editableGoal!.end_date as Date)
+
+
+                    endDateButton.setTitle(datestring, for: .normal)
+
+
+            let month_abb = datestring.components(separatedBy: " ")[0]
             
             //Set the var correctly
-            currentlyDisplayedMonthIndex = months.index(of: month_abb!)!
-            let displayedYear = Int((endDate.text?.components(separatedBy: " ")[1])!)
+            currentlyDisplayedMonthIndex = months.index(of: month_abb)!
+            let displayedYear = Int((datestring.components(separatedBy: " ")[1]))
             currentlyDisplayedYearIndex = displayedYear! - currentYear
         }
         else
         {
-            deleteGoalButton.isHidden = true
+                deleteGoalButton.isHidden = true
         }
         
         
@@ -592,19 +603,19 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     
     func textViewDidBeginEditing(_ textView: UITextView)
     {
-        
-    
+     textView.textColor = UIColor.white
     }
     
     func textViewDidEndEditing(_ textView: UITextView)
     {
         if textView.text.isEmpty
         {
-            textView.text = "Placeholder text here..."
+            textView.textColor = chosenThemePlaceholderTextColour
+            textView.text = PLACEHOLDER_TEXT
         }
         else
         {
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.white
         }
     }
     
@@ -612,10 +623,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     
     func textViewDidChange(_ textView: UITextView)
     {
-        
-        
-        
-        
+
         let predicate = NSPredicate(format: "SELF CONTAINS %@", argumentArray: ["\n"])
         newLineExists = predicate.evaluate(with: notes.text)
         
@@ -629,6 +637,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                 textView.font = standardFont
                 textView.textColor = chosenThemePlaceholderTextColour
                 doneButton.isEnabled = false
+            }else{
+                textView.textColor = UIColor.white;
             }
         }
         else
@@ -678,6 +688,33 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         return true
     }
     
+    @IBAction func clickStart(_ sender: Any) {
+
+        let alertActionSheet = UIAlertController(title: nil, message: "Specify when will the event start on the  calendar, or use a trigger", preferredStyle: .actionSheet)
+
+        alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Today", comment: "Todays Date"), style: .default, handler: { _ in
+
+            self.startDateButton.setTitle("Today", for: .normal)
+
+        }))
+        alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Pick a Date", comment: "Choose action"), style: .default, handler: { _ in
+
+            self.startDateButton.setTitle("Showing Date Picker", for: .normal)
+
+        }))
+        alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("X months after Y ends", comment: "Default action"), style: .default, handler: { _ in
+            self.startDateButton.setTitle(" Showing X Y Picker ", for: .normal)
+        }))
+
+        alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
+            NSLog("Showing Next Pages")
+        }))
+
+        self.present(alertActionSheet, animated: true, completion: nil)
+    }
+    @IBAction func clickEndes(_ sender: Any) {
+
+    }
     
 
 
