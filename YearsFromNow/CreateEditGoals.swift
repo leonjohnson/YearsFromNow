@@ -13,7 +13,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
 {
 
 
-    @IBOutlet weak var endDateButton: UIButton!
+    @IBOutlet weak var endDateField: PickerButton!
+    @IBOutlet weak var startDatePicker: PickerButton!
 
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -21,19 +22,20 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     @IBOutlet weak var cameraImage: UIImageView!
     @IBOutlet weak var notes: UITextView!
     @IBOutlet weak var endDateLabel: UILabel!
-    @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var add: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var endDateView: UIView!
-    @IBOutlet weak var endDatePicker : UIPickerView!
     @IBOutlet weak var deleteGoalButton : UIButton!
     @IBOutlet weak var toolTip : Tooltip!
+
     
     var validatedDateEntry:Bool? = Bool()
     var validatedTextEntry:Bool? = Bool()
     
     var editableGoal:Goal?
+
+
     
     
     var events : [(event: String, date: String, nsdate: Date)] = []
@@ -43,11 +45,11 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     
     
     var comp : DateComponents = DateComponents()
-    var currentYear : Int = 0
-    var currentMonth : Int = 0
-    
-    var currentlyDisplayedMonthIndex : Int = 0
-    var currentlyDisplayedYearIndex : Int = 0
+
+    //var currentYear : Int = 0
+    //var currentMonth : Int = 0
+    //var currentlyDisplayedMonthIndex : Int = 0
+    //  var currentlyDisplayedYearIndex : Int = 0
     
     var lastEndDateSelected : String = ""
     var lastEventsAlongTheWayDateSelected : String = ""
@@ -71,6 +73,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     var userIsNew:Bool?
     
     var alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
+
+
     
     
 
@@ -95,48 +99,23 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         //Cursor colour
         UITextView.appearance().tintColor = chosenThemeCursorColour
-        return
 
         let nextResponder : UIResponder = notes
         nextResponder.becomeFirstResponder()
         
         comp = (calendar as NSCalendar).components(.year, from: today)
-        currentYear = comp.year!
-        currentMonth = (calendar as NSCalendar).components(.month, from: today).month! - 1
+        endDateField.currentYear = comp.year!
+        endDateField.currentMonth = (calendar as NSCalendar).components(.month, from: today).month! - 1
+
+        startDatePicker.currentYear = comp.year!
+        startDatePicker.currentMonth = endDateField.currentMonth
         
-        
-        
-        
-        currentlyDisplayedYearIndex = 0
-        currentlyDisplayedMonthIndex = currentMonth
-        
-        initialOrLastDateSelected.append(months[currentMonth])
-        initialOrLastDateSelected.append(String(currentYear))
-        
-        
-        
-        //eventsAlongTheWayPicker.selectRow(currentMonth, inComponent: 0, animated: false)
-        //eventsAlongTheWayPicker.selectRow(currentYear, inComponent: 1, animated: false)
-        
-        endDate.text = months[currentMonth] + " " + String(currentYear)
-        
-        
-        endDatePicker.dataSource = self
-        endDatePicker.delegate = self
-        endDatePicker.isHidden = true
-        
-        
-        
-        let scrollableSize = CGSize(width: 320, height: self.view.frame.size.height);
-        scrollView.contentSize = scrollableSize
         
 
-        
-        let endDateViewTap = UITapGestureRecognizer(target: self, action: #selector(CreateEditGoals.animateEndDateView))
-        //endDateView.userInteractionEnabled = true
-        self.endDateView.addGestureRecognizer(endDateViewTap)
+        initialOrLastDateSelected.append(months[endDateField.currentMonth])
+        initialOrLastDateSelected.append(String(endDateField.currentYear))
 
-        
+
         notes.font = standardFont
         notes.backgroundColor = UIColor.clear
         notes.contentInset = UIEdgeInsetsMake(0, -4, 0, 0)
@@ -145,42 +124,41 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         notes.textColor = chosenThemePlaceholderTextColour
         
         
-        endDateLabel.font = labelFont
-        endDateLabel.textColor = chosenThemeTextColour
+        // endDateLabel.font = labelFont
+        // endDateLabel.textColor = chosenThemeTextColour
         
-        endDate.font = labelFont
-        endDate.textColor = chosenThemeTextColour
-        
-        
+        // endDate.font = labelFont
+        // endDate.textColor = chosenThemeTextColour
+
         //rgb(113,102,169)
         
         deleteGoalButton.backgroundColor = chosenThemeButtonColour
         deleteGoalButton.setTitleColor(chosenThemeTextColour, for: UIControlState())
         deleteGoalButton.titleLabel?.font = systemFontBold15
-        
-        
-        scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
-        let theTap = UITapGestureRecognizer(target: self, action: #selector(CreateEditGoals.scrollViewTapped(_:)))
-        scrollView.addGestureRecognizer(theTap)
-        
+        endDateField.selectedDate();
+        endDateField.createInputView();
+
+        startDatePicker.createInputView();
+        startDatePicker.onCompletion = startDateButton
+
+
 
     }
 
+
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     override func viewWillDisappear(_ animated: Bool)
     {
         editableGoal = nil
     }
-    
-    func scrollViewTapped(_ recognizer: UIGestureRecognizer) {
-        scrollView.endEditing(true)
-    }
-    
-    
+
+
     
     func dismissTooltip(_ sender:UITapGestureRecognizer)
     {
@@ -205,22 +183,13 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         {
             //Show the delete button as this an edit
             deleteGoalButton.isHidden = false
-            
-            //Set the end date to that in the database
-//            if(endDate != nil){
-//                endDate.text = nsDateToDateString(editableGoal!.end_date as Date)}
             let datestring  = nsDateToDateString(editableGoal!.end_date as Date)
-
-
-                    endDateButton.setTitle(datestring, for: .normal)
-
-
             let month_abb = datestring.components(separatedBy: " ")[0]
             
             //Set the var correctly
-            currentlyDisplayedMonthIndex = months.index(of: month_abb)!
+            endDateField.currentlyDisplayedMonthIndex = months.index(of: month_abb)!
             let displayedYear = Int((datestring.components(separatedBy: " ")[1]))
-            currentlyDisplayedYearIndex = displayedYear! - currentYear
+            endDateField.currentlyDisplayedYearIndex = displayedYear! - endDateField.currentYear
         }
         else
         {
@@ -357,8 +326,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
 
         // 1. The user has attempted to create a goal for the current month
         //print("a. \(currentlyDisplayedMonthIndex) b. \(currentlyDisplayedYearIndex)")
-        
-        if (currentlyDisplayedMonthIndex == currentMonth) && (currentlyDisplayedYearIndex == 0)
+
+        if (endDateField.currentlyDisplayedMonthIndex == endDateField.currentMonth) && (endDateField.currentlyDisplayedYearIndex == 0)
         {
             alertController = UIAlertController(title: "Are you sure?", message: "Did you mean to select an End Date for this month?", preferredStyle: .alert)
             
@@ -433,7 +402,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                         self.notes.text = self.notes.text.components(separatedBy: ("*")).joined()
                         //self.notes.text = self.notes.text.componentsSeparatedByString("*").joinWithSeparator("#")
                         self.editableGoal?.notes = self.notes.text
-                        self.editableGoal?.end_date = self.dateStringToNSDate(self.endDate.text!)
+                        self.editableGoal?.end_date = self.dateStringToNSDate(self.endDateField.text)
                 }
             }
             catch
@@ -452,7 +421,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             goal.notes = self.notes.text
             goal.start_date = Date()
             
-            goal.end_date = dateStringToNSDate(endDate.text!)
+            goal.end_date = dateStringToNSDate(self.endDateField.text)
             
             
             do {
@@ -517,65 +486,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         
         return notesTitle as NSAttributedString
     }
-    
-    
 
-    
-    @IBAction func animateEndDateView()
-    {
-                
-        //never show tooltip again
-        showEndDateTooltip = false
-        
-        notes.resignFirstResponder()
-        notes.textColor = chosenThemePlaceholderTextColour
-        //print("closing == \(openedBefore.description)")
-        var distanceToAnimateView : CGFloat = 0.00
-        if endDateViewExpanded == true // if we're already in edit mode...
-        {
-            distanceToAnimateView = -200.00
-        }
-        else
-        {
-            distanceToAnimateView = 200.00
-        }
-        
-        var monthToShow = currentMonth
-        var yearToShow = 0
-        
-        if let _ = editableGoal
-        {
-            monthToShow = (calendar as NSCalendar).components(.month, from:editableGoal!.end_date).month!-1
-            yearToShow = (calendar as NSCalendar).components(.year, from:editableGoal!.end_date).year! - currentYear
-            
-        }
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations:
-            {
-                self.endDateView.frame.size.height += distanceToAnimateView
-                
-                if self.openedBefore == false
-                {
-                    // scroll to the correct month. The current year is the first option by design.
-                    self.endDatePicker.selectRow(monthToShow, inComponent: 0, animated: false)
-                    self.endDatePicker.selectRow(yearToShow, inComponent: 1, animated: false)
-                }
-                
-                
-            }, completion:
-            {
-                finished in
-                self.endDateViewExpanded = !self.endDateViewExpanded
-                self.endDatePicker.isHidden = !self.endDatePicker.isHidden
-            }
-        )
-        
-       openedBefore = true
-    }
-    
-    
-
-    
 
     // MARK: - TEXTFIELD / TEXTVIEW DELEGATE METHODS
     
@@ -604,6 +515,11 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     func textViewDidBeginEditing(_ textView: UITextView)
     {
      textView.textColor = UIColor.white
+        doneButton.isEnabled = true;
+        if textView.text == PLACEHOLDER_TEXT
+        {
+            textView.text = "";
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView)
@@ -612,9 +528,11 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         {
             textView.textColor = chosenThemePlaceholderTextColour
             textView.text = PLACEHOLDER_TEXT
+            doneButton.isEnabled = false
         }
         else
         {
+            doneButton.isEnabled = true;
             textView.textColor = UIColor.white
         }
     }
@@ -683,39 +601,45 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         if textView.text == PLACEHOLDER_TEXT
         {
             textView.text = "";
-            doneButton.isEnabled = true
+            doneButton.isEnabled = false;
         }
         return true
     }
-    
+
+
     @IBAction func clickStart(_ sender: Any) {
 
+        //SHOW ACTION SHEET FOR CHOOSING START DATE
         let alertActionSheet = UIAlertController(title: nil, message: "Specify when will the event start on the  calendar, or use a trigger", preferredStyle: .actionSheet)
 
+        // ADD CURRENT FATE (TODAY) OPTION
         alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Today", comment: "Todays Date"), style: .default, handler: { _ in
-
+            //ON SELECTED TODAY
             self.startDateButton.setTitle("Today", for: .normal)
-
         }))
+        // ADD DATE CHOOSER OPTION
         alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Pick a Date", comment: "Choose action"), style: .default, handler: { _ in
 
-            self.startDateButton.setTitle("Showing Date Picker", for: .normal)
+            //SELECTED DATE CHOOSER
+           self.startDatePicker.becomeFirstResponder()
+            // self.startDateButton.setTitle("Showing Date Picker", for: .normal)
 
         }))
+        //ADD  X MANTHS AFTER Y FINISH OPTION
         alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("X months after Y ends", comment: "Default action"), style: .default, handler: { _ in
+            // X MANTHS AFTER Y FINISH SELECTED
+            GoalPickerViewController.show(from: self);
             self.startDateButton.setTitle(" Showing X Y Picker ", for: .normal)
         }))
-
+        // ADD CANCEL OPTION
         alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
-            NSLog("Showing Next Pages")
+            // JUST CLICKED CANCEL
         }))
-
+        // PRESENT VIEW
         self.present(alertActionSheet, animated: true, completion: nil)
     }
-    @IBAction func clickEndes(_ sender: Any) {
 
-    }
-    
+
 
 
 

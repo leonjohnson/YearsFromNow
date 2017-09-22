@@ -31,7 +31,7 @@ extension CreateEditGoals: UIPickerViewDelegate
         {
             return months[row]
         }
-        return String(currentYear+row)
+        return String(row)
     }
     
     
@@ -39,38 +39,38 @@ extension CreateEditGoals: UIPickerViewDelegate
     {
         //
         
-        var textToDisplay:String = ""
-        
-        
-        if component == 0
-        {
-            let selectedRowForMonth = months[row]
-            currentlyDisplayedMonthIndex = row
-            textToDisplay = selectedRowForMonth + " " + String(currentYear + currentlyDisplayedYearIndex)
-        }
-        if component == 1
-        {
-            let selectedRowForYear = String(currentYear+row)
-            currentlyDisplayedYearIndex = row
-            textToDisplay = months[currentlyDisplayedMonthIndex] + " " + selectedRowForYear
-            
-        }
-        
+        //        var textToDisplay:String = ""
+
+//        
+//        if component == 0
+//        {
+//            let selectedRowForMonth = months[row]
+//            currentlyDisplayedMonthIndex = row
+//            textToDisplay = selectedRowForMonth + " " + String(currentYear + currentlyDisplayedYearIndex)
+//        }
+//        if component == 1
+//        {
+//            let selectedRowForYear = String(currentYear+row)
+//            currentlyDisplayedYearIndex = row
+//            textToDisplay = months[currentlyDisplayedMonthIndex] + " " + selectedRowForYear
+//            
+//        }
+
         //endDate.text
-        if pickerView == endDatePicker
-        {
-            endDate.text = textToDisplay
-            lastEventsAlongTheWayDateSelected = textToDisplay
-        }
+        //     if pickerView == endDatePicker
+        //    {
+        //         endDateField.text = textToDisplay
+        //        lastEventsAlongTheWayDateSelected = textToDisplay
+        //   }
         
         
-        // validate the selection
-        if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < currentMonth
-        {
-            pickerView.selectRow(currentMonth, inComponent: 0, animated: true)
-        }
-        
-    }
+//        // validate the selection
+//        if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < currentMonth
+//        {
+//            pickerView.selectRow(currentMonth, inComponent: 0, animated: true)
+//        }
+
+           }
     
     
 }
