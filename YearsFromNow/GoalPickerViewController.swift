@@ -9,10 +9,24 @@
 import UIKit
 
 class GoalPickerViewController: UIViewController {
-    //GoalPickerViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
+      @IBOutlet weak var taskPicker: TaskPicker!
+      @IBOutlet weak var monthCountPicker: NumberPicker!
+
+    var selectedGoal : Goal?  = nil;
+
+    //GoalPickerViewController
+     override func viewDidLoad() {
+        super.viewDidLoad()
+        taskPicker.completionBlock={ (goal) -> Void in
+            self.selectedGoal = goal;
+        }
+        monthCountPicker.createInputView();
+
+        monthCountPicker.completionBlock={ (goal) -> Void in
+
+        }
+        taskPicker.createInputView();
         // Do any additional setup after loading the view.
     }
 
@@ -28,6 +42,11 @@ class GoalPickerViewController: UIViewController {
     }
 
     @IBAction func cancelInsert()
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func clickDone()
     {
         self.dismiss(animated: true, completion: nil)
     }

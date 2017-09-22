@@ -17,13 +17,13 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
         // Drawing code
     }
     */
-    typealias CompletionBlock = (NSString?) -> Void
+    var completionBlock: ((String) -> Void)? = nil
 
-    var currentYear:Int = 0;
-    var currentMonth:Int = 0;
+    var startYear:Int = 0;
+    var startMonth:Int = 0;
     var currentlyDisplayedYearIndex:Int = 0;
     var currentlyDisplayedMonthIndex:Int = 0;
-    var onCompletion: UIButton? ;
+   
 
 
     // This holds the assigned input view (superclass property is readonly)
@@ -50,17 +50,17 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
     func selectedDate(){
 
         // validate the selection
-        if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < currentMonth
+        if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < startMonth
         {
-            customInputView?.selectRow(currentMonth, inComponent: 0, animated: false)
-            currentlyDisplayedMonthIndex = currentMonth;
+            customInputView?.selectRow(startMonth, inComponent: 0, animated: false)
+            currentlyDisplayedMonthIndex = startMonth;
         }
 
          let selectedRowForMonth = months[currentlyDisplayedMonthIndex]
-         text = selectedRowForMonth + " " + String(currentYear + currentlyDisplayedYearIndex)
+         text = selectedRowForMonth + " " + String(startYear + currentlyDisplayedYearIndex)
         self.resignFirstResponder();
-        if(onCompletion != nil){
-            onCompletion?.setTitle(text, for: .normal)
+        if let completionBlock = self.completionBlock {
+            completionBlock(text);
         }
 
     }
@@ -133,13 +133,12 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
         {
             return months[row]
         }
-        return String(currentYear+row)
+        return String(startYear+row)
     }
 
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-
         if component == 0
         {
             currentlyDisplayedMonthIndex = row
@@ -149,12 +148,26 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
             currentlyDisplayedYearIndex = row
         }
 
-        // validate the selection
-        if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < currentMonth
-        {
-            pickerView.selectRow(currentMonth, inComponent: 0, animated: true)
-            currentlyDisplayedMonthIndex = currentMonth;
-        }
 
+        validateDate(pickerView: pickerView);
+
+//        // validate the selection
+//        if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < startMonth
+//        {
+//            pickerView.selectRow(startMonth, inComponent: 0, animated: true)
+//            currentlyDisplayedMonthIndex = startMonth;
+//        }
+
+    }
+
+    func validateDate(pickerView:UIPickerView){
+        let  selectedDate =  months[currentlyDisplayedMonthIndex] + " " + String(startYear + currentlyDisplayedYearIndex)
+
+        let  startDate =  months[startMonth] + " " + String(startYear)
+
+        if(CreateEditGoals.dateStringToNSDate(startDate)>CreateEditGoals.dateStringToNSDate(selectedDate)){
+            pickerView.selectRow(startMonth, inComponent: 0, animated: true)
+            pickerView.selectRow(startYear, inComponent: 1, animated: true)
+        }
     }
 }

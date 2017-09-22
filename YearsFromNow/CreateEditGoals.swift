@@ -37,7 +37,6 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
 
 
     
-    
     var events : [(event: String, date: String, nsdate: Date)] = []
     var selectedEndMonth : String = ""
     var selecetdEndYear : String = ""
@@ -74,12 +73,6 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     
     var alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
 
-
-    
-    
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,16 +97,24 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         nextResponder.becomeFirstResponder()
         
         comp = (calendar as NSCalendar).components(.year, from: today)
-        endDateField.currentYear = comp.year!
-        endDateField.currentMonth = (calendar as NSCalendar).components(.month, from: today).month! - 1
+        endDateField.startYear = comp.year!
+        let thisMonth = (calendar as NSCalendar).components(.month, from: today).month! - 1
+        startDatePicker.startYear = comp.year!
+        startDatePicker.startMonth = thisMonth
+        startDatePicker.currentlyDisplayedMonthIndex = thisMonth
 
-        startDatePicker.currentYear = comp.year!
-        startDatePicker.currentMonth = endDateField.currentMonth
+
+
+        endDateField.startMonth = thisMonth
+        endDateField.currentlyDisplayedYearIndex = 0;
+        endDateField.currentlyDisplayedMonthIndex = thisMonth
+
+
         
         
 
-        initialOrLastDateSelected.append(months[endDateField.currentMonth])
-        initialOrLastDateSelected.append(String(endDateField.currentYear))
+        initialOrLastDateSelected.append(months[endDateField.startMonth])
+        initialOrLastDateSelected.append(String(endDateField.startYear))
 
 
         notes.font = standardFont
@@ -139,10 +140,18 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         endDateField.createInputView();
 
         startDatePicker.createInputView();
-        startDatePicker.onCompletion = startDateButton
+        startDatePicker.completionBlock = { (string) -> Void in
+            self.startDateButton.setTitle(string, for: .normal)
 
+            self.endDateField.startMonth = self.startDatePicker.currentlyDisplayedMonthIndex
+            self.endDateField.startYear = self.startDatePicker.startYear+self.startDatePicker.currentlyDisplayedYearIndex;
+            self.endDateField.selectedDate()
+        }
+        setStartToday();
 
+        if(CreateEditGoals.dateStringToNSDate(self.endDateField.text)<CreateEditGoals.dateStringToNSDate(self.endDateField.text)){
 
+        }
     }
 
 
@@ -189,7 +198,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             //Set the var correctly
             endDateField.currentlyDisplayedMonthIndex = months.index(of: month_abb)!
             let displayedYear = Int((datestring.components(separatedBy: " ")[1]))
-            endDateField.currentlyDisplayedYearIndex = displayedYear! - endDateField.currentYear
+            endDateField.currentlyDisplayedYearIndex = displayedYear! - endDateField.startYear
         }
         else
         {
@@ -279,7 +288,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     /*
     DATE CONVERSION METHODS
     */
-    func dateStringToNSDate(_ dateStringParameter:String) ->Date
+    static func dateStringToNSDate(_ dateStringParameter:String) ->Date
     {
         // 'Sep 2015' to NSDate
         var dateString = dateStringParameter
@@ -327,7 +336,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         // 1. The user has attempted to create a goal for the current month
         //print("a. \(currentlyDisplayedMonthIndex) b. \(currentlyDisplayedYearIndex)")
 
-        if (endDateField.currentlyDisplayedMonthIndex == endDateField.currentMonth) && (endDateField.currentlyDisplayedYearIndex == 0)
+        if (endDateField.currentlyDisplayedMonthIndex == endDateField.startMonth) && (endDateField.currentlyDisplayedYearIndex == 0)
         {
             alertController = UIAlertController(title: "Are you sure?", message: "Did you mean to select an End Date for this month?", preferredStyle: .alert)
             
@@ -402,7 +411,8 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                         self.notes.text = self.notes.text.components(separatedBy: ("*")).joined()
                         //self.notes.text = self.notes.text.componentsSeparatedByString("*").joinWithSeparator("#")
                         self.editableGoal?.notes = self.notes.text
-                        self.editableGoal?.end_date = self.dateStringToNSDate(self.endDateField.text)
+                        self.editableGoal?.end_date = CreateEditGoals.dateStringToNSDate(self.endDateField.text)
+                        self.editableGoal?.start_date = CreateEditGoals.dateStringToNSDate(self.startDateButton.title(for: .normal)!)
                 }
             }
             catch
@@ -421,7 +431,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             goal.notes = self.notes.text
             goal.start_date = Date()
             
-            goal.end_date = dateStringToNSDate(self.endDateField.text)
+            goal.end_date = CreateEditGoals.dateStringToNSDate(self.endDateField.text)
             
             
             do {
@@ -548,7 +558,6 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         if newLineExists == false
         {
             notes.attributedText = NSAttributedString(string:notes.text, attributes:headerAttributes)
-            //print("applied the header attributes")
             if textView.text.length == 0
             {
                 textView.text = PLACEHOLDER_TEXT
@@ -615,7 +624,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         // ADD CURRENT FATE (TODAY) OPTION
         alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Today", comment: "Todays Date"), style: .default, handler: { _ in
             //ON SELECTED TODAY
-            self.startDateButton.setTitle("Today", for: .normal)
+            self.setStartToday()
         }))
         // ADD DATE CHOOSER OPTION
         alertActionSheet.addAction(UIAlertAction(title: NSLocalizedString("Pick a Date", comment: "Choose action"), style: .default, handler: { _ in
@@ -637,6 +646,16 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         }))
         // PRESENT VIEW
         self.present(alertActionSheet, animated: true, completion: nil)
+    }
+    func setStartToday(){
+
+        let comp = (calendar as NSCalendar).components(.year, from: today)
+        let thisMonth = (calendar as NSCalendar).components(.month, from: today).month! - 1
+        self.startDatePicker.startYear = comp.year!
+        self.startDatePicker.startMonth = thisMonth
+        self.startDatePicker.currentlyDisplayedMonthIndex = thisMonth
+        self.startDatePicker.currentlyDisplayedYearIndex = 0;
+        self.startDatePicker.selectedDate();
     }
 
 
