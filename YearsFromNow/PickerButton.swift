@@ -44,7 +44,6 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
             keyboardToolbar.items = [flexBarButton, doneBarButton]
         inputView = endDatePicker;
         inputAccessoryView = keyboardToolbar;
-
     }
     func clickedDate(status :Bool ){
         // validate the selection
@@ -62,7 +61,9 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
         }
     }
     func selectedDate(){
+        select()
         clickedDate(status: false)
+
     }
 
     // We override the superclass property as computed, and actually
@@ -110,6 +111,12 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
     }
     @IBAction func tap(_ sender: UIButton) {
         self.becomeFirstResponder()
+
+    }
+
+    func select(){
+        customInputView?.selectRow(currentlyDisplayedMonthIndex, inComponent: 0, animated: true)
+        customInputView?.selectRow(currentlyDisplayedYearIndex, inComponent: 1, animated: true)
     }
 
     // MARK - UIPicker Data source and delegate

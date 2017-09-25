@@ -343,6 +343,20 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
         // 1. The user has attempted to create a goal for the current month
         //print("a. \(currentlyDisplayedMonthIndex) b. \(currentlyDisplayedYearIndex)")
 
+        let startDateString = self.startDateButton.title(for: .normal)!;
+
+        let endDate = CreateEditGoals.dateStringToNSDate(self.endDateField.text);
+        let startDate = CreateEditGoals.dateStringToNSDate(startDateString);
+        
+        if endDate < startDate {
+            alertController = UIAlertController(title: "Date MissMatch", message: "start Date is greater than end Date", preferredStyle: .alert)
+            let ok  = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
+            return;
+        }
+
+
         if (endDateField.currentlyDisplayedMonthIndex == endDateField.startMonth) && (endDateField.currentlyDisplayedYearIndex == 0)
         {
             alertController = UIAlertController(title: "Are you sure?", message: "Did you mean to select an End Date for this month?", preferredStyle: .alert)
@@ -406,8 +420,28 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
 
     func saveGoal()
     {
+
+        let goalEndDate = CreateEditGoals.dateStringToNSDate(self.endDateField.text);
         if editableGoal != nil
         {
+            do{
+                let realm = try Realm()
+                let  goals = realm.objects(Goal.self).filter("relatedGoal == %@", editableGoal as Any)
+                 let dateEnd :Date  = goalEndDate as Date
+                for goal in goals {
+
+                     let startDate = Calendar.current.date(byAdding: .month, value: goal.mothsAfterX, to: dateEnd)
+                    try realm.write
+                    {
+                        goal.start_date = startDate!;
+                    }
+                }
+            }catch{
+                
+            }
+
+
+
 
             do {
                 //print("UPDATING RECORD")
@@ -418,7 +452,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
                     self.notes.text = self.notes.text.components(separatedBy: ("*")).joined()
                     //self.notes.text = self.notes.text.componentsSeparatedByString("*").joinWithSeparator("#")
                     self.editableGoal?.notes = self.notes.text
-                    self.editableGoal?.end_date = CreateEditGoals.dateStringToNSDate(self.endDateField.text)
+                    self.editableGoal?.end_date = goalEndDate
                     self.editableGoal?.start_date = CreateEditGoals.dateStringToNSDate(self.startDateButton.title(for: .normal)!)
                     self.editableGoal?.relatedGoal = self.conectedGoal
                     self.editableGoal?.mothsAfterX = self.conectedGoalMonthsAfter!
@@ -442,7 +476,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             goal.notes = self.notes.text
             goal.start_date = Date()
 
-            goal.end_date = CreateEditGoals.dateStringToNSDate(self.endDateField.text)
+            goal.end_date = goalEndDate
             goal.start_date = CreateEditGoals.dateStringToNSDate(self.startDateButton.title(for: .normal)!)
 
             goal.relatedGoal = self.conectedGoal
