@@ -13,19 +13,33 @@ class GoalPickerViewController: UIViewController {
       @IBOutlet weak var taskPicker: TaskPicker!
       @IBOutlet weak var monthCountPicker: NumberPicker!
 
+
+
     var selectedGoal : Goal?  = nil;
+    var selectedMonths : Int?  = 0;
+    var parentPage: CreateEditGoals?;
+
 
     //GoalPickerViewController
      override func viewDidLoad() {
         super.viewDidLoad()
+
+        selectedGoal = parentPage?.conectedGoal
+        selectedMonths = parentPage?.conectedGoalMonthsAfter
+
+        if(selectedGoal != nil){
+            taskPicker.text = (selectedGoal?.notes)!;
+        }
         taskPicker.completionBlock={ (goal) -> Void in
             self.selectedGoal = goal;
         }
         monthCountPicker.createInputView();
+        monthCountPicker.setSelected(selection: selectedMonths!);
 
         monthCountPicker.completionBlock={ (goal) -> Void in
-
+            self.selectedMonths = goal
         }
+        taskPicker.currentTask = parentPage?.editableGoal;
         taskPicker.createInputView();
         // Do any additional setup after loading the view.
     }
@@ -37,7 +51,8 @@ class GoalPickerViewController: UIViewController {
 
     static func show(from:UIViewController ){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GoalPickerViewController") as! GoalPickerViewController
-        from.present(vc, animated: true) {
+        vc.parentPage = from as? CreateEditGoals ;
+          from.present(vc, animated: true) {
         };
     }
 
@@ -48,7 +63,31 @@ class GoalPickerViewController: UIViewController {
 
     @IBAction func clickDone()
     {
+        if  self.parentPage != nil {
+            setDateAndText(parent: parentPage!);
+        }
         self.dismiss(animated: true, completion: nil)
+    }
+    func setDateAndText(parent :CreateEditGoals){
+
+        //END DATE
+        let dateEnd :Date  = selectedGoal!.end_date as Date
+
+        let startDate = Calendar.current.date(byAdding: .month, value: self.selectedMonths!, to: dateEnd)
+
+        let dateString = CreateEditGoals.nsDateToDateString(startDate!)
+
+        let month_abb_end = dateString.components(separatedBy: " ")[0]
+
+        //Set the var correctly
+        parent.startDatePicker.currentlyDisplayedMonthIndex = months.index(of: month_abb_end)!
+        let displayedYearEnd = Int((dateString.components(separatedBy: " ")[1]))
+        parent.startDatePicker.currentlyDisplayedYearIndex = displayedYearEnd! - parent.startDatePicker.startYear
+        parent.startDatePicker.selectedDate()
+
+
+        parent.conectedGoal = selectedGoal ;
+        parent.conectedGoalMonthsAfter = selectedMonths ;
     }
 
     /*

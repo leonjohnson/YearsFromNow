@@ -224,4 +224,11 @@ extension UIColor
         
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
 }

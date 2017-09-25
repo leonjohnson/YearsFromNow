@@ -17,11 +17,13 @@ class TaskPicker: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
      // Drawing code
      }
      */
-    var completionBlock: ((Goal) -> Void)? = nil
+    var completionBlock: ((Goal?) -> Void)? = nil
 
     var goals : Results < Goal >? = nil;
 
     var selectedIndex  = 0;
+
+    var currentTask : Goal? = nil;
 
 
 
@@ -61,6 +63,12 @@ class TaskPicker: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
     func selectedItem(){
 
         resignFirstResponder()
+        if((goals == nil || goals?.count == 0)){
+            if let completionBlock = self.completionBlock {
+                completionBlock(nil);
+            }
+            return ;
+            }
         if let completionBlock = self.completionBlock {
             completionBlock((goals?[selectedIndex])!);
         }

@@ -9,8 +9,13 @@ class Goal:Object
     dynamic var start_after_goal = ""
     dynamic var start_days_after = ""
     dynamic var end_date = Date()
+
+    dynamic var mothsAfterX = 0;
+    dynamic var relatedGoal:Goal? = nil
     
+    dynamic var category = 0;
     
+
     
     
     

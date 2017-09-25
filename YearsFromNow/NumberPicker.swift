@@ -19,7 +19,7 @@ class NumberPicker: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
      */
     var completionBlock: ((Int) -> Void)? = nil
 
-    let max = 24
+    let max = 25
     var selectedIndex  = 0;
     var scrollingIndex  = 0;
 
@@ -47,17 +47,19 @@ class NumberPicker: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
 
 
     func selectedItem(){
-
         resignFirstResponder()
+        setSelected(selection: scrollingIndex)
         if let completionBlock = self.completionBlock {
             completionBlock(selectedIndex);
         }
-        selectedIndex = scrollingIndex;
-         text = String(selectedIndex ) + " Months";
+
+    }
+    func setSelected(selection:Int)  {
+        selectedIndex = selection;
+        text = String(selectedIndex ) + " Months";
         if(selectedIndex == 0){
             text =  " Soon ";
         }
-
     }
 
     // We override the superclass property as computed, and actually

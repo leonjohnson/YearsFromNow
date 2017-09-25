@@ -17,7 +17,7 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
         // Drawing code
     }
     */
-    var completionBlock: ((String) -> Void)? = nil
+    var completionBlock: ((String , Bool) -> Void)? = nil
 
     var startYear:Int = 0;
     var startMonth:Int = 0;
@@ -40,15 +40,13 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
             let keyboardToolbar = UIToolbar()
             keyboardToolbar.sizeToFit()
             let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(PickerButton.selectedDate))
+            let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(PickerButton.clickedDate))
             keyboardToolbar.items = [flexBarButton, doneBarButton]
         inputView = endDatePicker;
         inputAccessoryView = keyboardToolbar;
 
     }
-
-    func selectedDate(){
-
+    func clickedDate(status :Bool ){
         // validate the selection
         if currentlyDisplayedYearIndex == 0 && currentlyDisplayedMonthIndex < startMonth
         {
@@ -56,13 +54,15 @@ class PickerButton: UIButton,UIPickerViewDelegate,UIPickerViewDataSource {
             currentlyDisplayedMonthIndex = startMonth;
         }
 
-         let selectedRowForMonth = months[currentlyDisplayedMonthIndex]
-         text = selectedRowForMonth + " " + String(startYear + currentlyDisplayedYearIndex)
+        let selectedRowForMonth = months[currentlyDisplayedMonthIndex]
+        text = selectedRowForMonth + " " + String(startYear + currentlyDisplayedYearIndex)
         self.resignFirstResponder();
         if let completionBlock = self.completionBlock {
-            completionBlock(text);
+            completionBlock(text , status);
         }
-
+    }
+    func selectedDate(){
+        clickedDate(status: false)
     }
 
     // We override the superclass property as computed, and actually

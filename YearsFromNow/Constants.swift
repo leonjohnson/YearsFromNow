@@ -12,6 +12,9 @@ let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OC
 let calendar = Calendar.current
 let today = Date()
 
+let colorsCategoryList = [purple,white,black,blue,green,red]
+let colorsCategoryName = ["Purple","White","Black","Blue","Green","Red"]
+
 let timeLineHeight = 40
 
 // Theme
@@ -34,6 +37,10 @@ var chosenThemeCursorColour =  UIView.appearance().tintColor  // The default cur
 
 var purple = UIColor(red: CGFloat(100)/255, green: CGFloat(102)/255, blue: (200)/255, alpha: 1.0)
 var white = UIColor.white
+var black = UIColor.black
+var blue = UIColor.blue
+var green = UIColor.green;
+var red   = UIColor.red
 
 
 // Fonts - use this to create a new font - UIFont(name: , size: )
