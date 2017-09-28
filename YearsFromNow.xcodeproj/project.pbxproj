@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3740347999B9EFF75315D7F0 /* Pods_YearsFromNow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */; };
 		4A1E714D1F6A6F28003AF82E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E714C1F6A6F28003AF82E /* TutorialViewController.swift */; };
+		4A28D6E31F78CD880019D1B6 /* colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A28D6E21F78CD880019D1B6 /* colors.plist */; };
 		4A3AE4BB1F694C04004A0B9D /* TransitionTreasury.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4BA1F694C04004A0B9D /* TransitionTreasury.swift */; };
 		4A3AE4BE1F694C52004A0B9D /* TRStatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4BC1F694C52004A0B9D /* TRStatusBarStyle.swift */; };
 		4A3AE4BF1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4BD1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift */; };
@@ -20,6 +21,11 @@
 		4A3AE4CE1F69506A004A0B9D /* ScanbotTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4CD1F69506A004A0B9D /* ScanbotTransitionAnimation.swift */; };
 		4A3AE4D01F6955A9004A0B9D /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4CF1F6955A9004A0B9D /* Transition.swift */; };
 		4A3AE4D21F695715004A0B9D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3AE4D11F695715004A0B9D /* SettingsViewController.swift */; };
+		4A83D0411F74D72C00D83DF6 /* GoalPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83D0401F74D72C00D83DF6 /* GoalPickerViewController.swift */; };
+		4A83D0431F750C2900D83DF6 /* PickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83D0421F750C2900D83DF6 /* PickerButton.swift */; };
+		4A83D0451F753A0A00D83DF6 /* TaskPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83D0441F753A0A00D83DF6 /* TaskPicker.swift */; };
+		4A83D0471F75521900D83DF6 /* NumberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83D0461F75521900D83DF6 /* NumberPicker.swift */; };
+		4A83D0491F755A0D00D83DF6 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83D0481F755A0D00D83DF6 /* ImagePickerViewController.swift */; };
 		F7017F411BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */; };
 		F7017F461BAC9EF20094BAD1 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7017F451BAC9EF20094BAD1 /* Tooltip.swift */; };
 		F72F1FF91F460B2800B23531 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78EBB501F46009F00902CAC /* RealmSwift.framework */; };
@@ -48,6 +54,7 @@
 /* Begin PBXFileReference section */
 		2CC8ADD3B45560972829FC78 /* Pods-YearsFromNow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearsFromNow.release.xcconfig"; path = "Pods/Target Support Files/Pods-YearsFromNow/Pods-YearsFromNow.release.xcconfig"; sourceTree = "<group>"; };
 		4A1E714C1F6A6F28003AF82E /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		4A28D6E21F78CD880019D1B6 /* colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colors.plist; sourceTree = "<group>"; };
 		4A3AE4BA1F694C04004A0B9D /* TransitionTreasury.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionTreasury.swift; path = Transition/TransitionTreasury.swift; sourceTree = "<group>"; };
 		4A3AE4BC1F694C52004A0B9D /* TRStatusBarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRStatusBarStyle.swift; path = Transition/TRStatusBarStyle.swift; sourceTree = "<group>"; };
 		4A3AE4BD1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TRViewControllerAnimatedTransitioning.swift; path = Transition/TRViewControllerAnimatedTransitioning.swift; sourceTree = "<group>"; };
@@ -60,6 +67,11 @@
 		4A3AE4CF1F6955A9004A0B9D /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transition.swift; path = Transition/Transition.swift; sourceTree = "<group>"; };
 		4A3AE4D11F695715004A0B9D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4A3AE4D31F695A85004A0B9D /* TransitionAnimation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TransitionAnimation.framework; path = YearsFromNow/Transition/TransitionAnimation.framework; sourceTree = "<group>"; };
+		4A83D0401F74D72C00D83DF6 /* GoalPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPickerViewController.swift; sourceTree = "<group>"; };
+		4A83D0421F750C2900D83DF6 /* PickerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerButton.swift; sourceTree = "<group>"; };
+		4A83D0441F753A0A00D83DF6 /* TaskPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskPicker.swift; sourceTree = "<group>"; };
+		4A83D0461F75521900D83DF6 /* NumberPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPicker.swift; sourceTree = "<group>"; };
+		4A83D0481F755A0D00D83DF6 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		CC8EF07C3BEAF44254BD5B38 /* Pods-YearsFromNow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YearsFromNow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YearsFromNow/Pods-YearsFromNow.debug.xcconfig"; sourceTree = "<group>"; };
 		D56EBE4267989C348B6BB3D6 /* Pods_YearsFromNow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YearsFromNow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7017F401BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEditScrollViewDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				F7F486AF1BA721BC00C2615B /* Model.swift */,
+				4A28D6E21F78CD880019D1B6 /* colors.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -223,6 +236,9 @@
 		F76172D41BA6DD210097F912 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A83D0421F750C2900D83DF6 /* PickerButton.swift */,
+				4A83D0441F753A0A00D83DF6 /* TaskPicker.swift */,
+				4A83D0461F75521900D83DF6 /* NumberPicker.swift */,
 				F76172D71BA6DDBA0097F912 /* TimeLineView.swift */,
 				F75637701BB4C9C300626B9E /* TimeLineScrollView.swift */,
 				F7E2B7771BB21F4900DBB91B /* TimeLineViewGoalLabel.swift */,
@@ -247,6 +263,8 @@
 				F76172D11BA6DCEE0097F912 /* CreateEditGoals.swift */,
 				4A3AE4D11F695715004A0B9D /* SettingsViewController.swift */,
 				4A1E714C1F6A6F28003AF82E /* TutorialViewController.swift */,
+				4A83D0401F74D72C00D83DF6 /* GoalPickerViewController.swift */,
+				4A83D0481F755A0D00D83DF6 /* ImagePickerViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -332,6 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A28D6E31F78CD880019D1B6 /* colors.plist in Resources */,
 				F76172B71BA6D92F0097F912 /* Main.storyboard in Resources */,
 				F76172BC1BA6D92F0097F912 /* LaunchScreen.xib in Resources */,
 				F76172B91BA6D92F0097F912 /* Images.xcassets in Resources */,
@@ -418,6 +437,7 @@
 				4A3AE4C61F694C87004A0B9D /* UITabBarController+TRTransition.swift in Sources */,
 				4A3AE4C51F694C87004A0B9D /* TRTabBarTransitionDelegate.swift in Sources */,
 				4A3AE4CE1F69506A004A0B9D /* ScanbotTransitionAnimation.swift in Sources */,
+				4A83D0431F750C2900D83DF6 /* PickerButton.swift in Sources */,
 				F7F486B01BA721BC00C2615B /* Model.swift in Sources */,
 				F7E2B7781BB21F4900DBB91B /* TimeLineViewGoalLabel.swift in Sources */,
 				F76172B41BA6D92F0097F912 /* DisplayGoals.swift in Sources */,
@@ -426,20 +446,24 @@
 				F75637711BB4C9C300626B9E /* TimeLineScrollView.swift in Sources */,
 				F7A94CFC1F4C697E00D68A29 /* ListOfGoalsViewController.swift in Sources */,
 				4A3AE4BF1F694C52004A0B9D /* TRViewControllerAnimatedTransitioning.swift in Sources */,
+				4A83D0471F75521900D83DF6 /* NumberPicker.swift in Sources */,
 				F75637751BB9BDC400626B9E /* OnBoard.swift in Sources */,
 				F7017F411BABA1090094BAD1 /* CreateEditScrollViewDelegate.swift in Sources */,
 				F76172D21BA6DCEE0097F912 /* CreateEditGoals.swift in Sources */,
 				F75BEC6A1BD44683008EE1F2 /* CreateEditScrollView.swift in Sources */,
 				4A1E714D1F6A6F28003AF82E /* TutorialViewController.swift in Sources */,
 				F7E5A9331BA9D246003162EF /* PageContentViewController.swift in Sources */,
+				4A83D0491F755A0D00D83DF6 /* ImagePickerViewController.swift in Sources */,
 				F7F486B21BA78EAA00C2615B /* Extensions.swift in Sources */,
 				4A3AE4C41F694C87004A0B9D /* TRTabBarControllerDelegate.swift in Sources */,
 				F76172D91BA6DDBA0097F912 /* TimeLineView.swift in Sources */,
 				F76172DE1BA6DDE70097F912 /* PickerDelegate.swift in Sources */,
 				F76172DC1BA6DDCC0097F912 /* Constants.swift in Sources */,
+				4A83D0411F74D72C00D83DF6 /* GoalPickerViewController.swift in Sources */,
 				4A3AE4BE1F694C52004A0B9D /* TRStatusBarStyle.swift in Sources */,
 				4A3AE4D21F695715004A0B9D /* SettingsViewController.swift in Sources */,
 				F7017F461BAC9EF20094BAD1 /* Tooltip.swift in Sources */,
+				4A83D0451F753A0A00D83DF6 /* TaskPicker.swift in Sources */,
 				4A3AE4CB1F694E7A004A0B9D /* UIViewController+TRPresent.swift in Sources */,
 				4A3AE4CA1F694E7A004A0B9D /* TRViewControllerTransitionDelegate.swift in Sources */,
 				4A3AE4BB1F694C04004A0B9D /* TransitionTreasury.swift in Sources */,
@@ -586,7 +610,7 @@
 				INFOPLIST_FILE = YearsFromNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow.toobler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -612,7 +636,7 @@
 				INFOPLIST_FILE = YearsFromNow/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.building50.yearsfromnow.toobler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
