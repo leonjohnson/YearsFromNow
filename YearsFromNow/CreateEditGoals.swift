@@ -29,7 +29,9 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
     @IBOutlet weak var deleteGoalButton : UIButton!
     @IBOutlet weak var toolTip : Tooltip!
 
-
+    @IBOutlet weak var categoryImage: UIImageView!
+    @IBOutlet weak var categoryImageName: UIButton!
+    
     var validatedDateEntry:Bool? = Bool()
     var validatedTextEntry:Bool? = Bool()
 
@@ -142,6 +144,7 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
 
         prefillData()
 
+
     }
 
 
@@ -247,6 +250,9 @@ class CreateEditGoals: UIViewController, UIPickerViewDataSource, UITextFieldDele
             //The user knows how to change the end date at this point
             // toolTip.removeFromSuperview()
         }
+        categoryImage.backgroundColor = colorsCategoryList[selectedCategoryIndex!];
+
+        categoryImageName .setTitle(colorsCategoryName[selectedCategoryIndex!], for: .normal);
 
     }
 
